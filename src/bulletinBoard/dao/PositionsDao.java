@@ -20,7 +20,7 @@ public class PositionsDao {
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
-			sql.append("SELECT * FROM branches ");
+			sql.append("SELECT * FROM positions ");
 
 			ps = connection.prepareStatement(sql.toString());
 			System.out.println(ps);

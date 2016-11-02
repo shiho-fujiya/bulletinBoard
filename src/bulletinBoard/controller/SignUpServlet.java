@@ -22,18 +22,13 @@ public class SignUpServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
 		List<Branches> branches = new BranchesService().getBranches();
+		List<Positions> positions = new PositionsService().getPositions();
 
 		//System.out.println(branches.size());
 		request.setAttribute("branches", branches);
-
-		List<Positions> positions = new PositionsService().getPositions();
-
-		System.out.println(positions.size());
 		request.setAttribute("positions", positions);
 		request.getRequestDispatcher("signup.jsp").forward(request, response);
 	}
-
-
 
 /*	@Override
 	protected void doPost(HttpServletRequest request,
