@@ -21,19 +21,18 @@ public class UserDao {
 
 		PreparedStatement ps = null;
 		try {
-			String sql = "SELECT * FROM user WHERE (account = ?) AND password = ?";
+			String sql = "SELECT * FROM users WHERE (account = ?) AND password = ?";
 
 			ps = connection.prepareStatement(sql);
 			ps.setString(1, account);
-			ps.setString(2, account);
-			ps.setString(3, password);
+			ps.setString(2, password);
 
 			ResultSet rs = ps.executeQuery();
 			List<User> userList = toUserList(rs);
 			if (userList.isEmpty() == true) {
 				return null;
-			} else if (5 <= userList.size()) {
-				throw new IllegalStateException("5 <= userList.size()");
+			} else if (2 <= userList.size()) {
+				throw new IllegalStateException("2 <= userList.size()");
 			} else {
 				return userList.get(0);
 			}
@@ -53,8 +52,8 @@ public class UserDao {
 				String account = rs.getString("account");
 				String password = rs.getString("password");
 				String name = rs.getString("name");
-				int branchId = rs.getInt("branchId");
-				int positionId = rs.getInt("positionId");
+				int branchId = rs.getInt("branch_id");
+				int positionId = rs.getInt("position_id");
 				boolean operation = rs.getBoolean("operation");
 				Timestamp insertDate = rs.getTimestamp("insert_date");
 				Timestamp updateDate = rs.getTimestamp("update_date");
@@ -171,7 +170,7 @@ public class UserDao {
 			if (userList.isEmpty() == true) {
 				return null;
 			} else if (2 <= userList.size()) {
-				throw new IllegalStateException("5 <= userList.size()");
+				throw new IllegalStateException("2 <= userList.size()");
 			} else {
 				return userList.get(0);
 			}
