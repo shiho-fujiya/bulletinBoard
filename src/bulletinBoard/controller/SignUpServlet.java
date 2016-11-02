@@ -1,6 +1,7 @@
 package bulletinBoard.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -8,11 +9,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.commons.lang.StringUtils;
 
 import bulletinBoard.beans.Branches;
 import bulletinBoard.beans.Positions;
+import bulletinBoard.beans.User;
 import bulletinBoard.service.BranchesService;
 import bulletinBoard.service.PositionsService;
+import bulletinBoard.service.UserService;
 
 @WebServlet(urlPatterns = { "/signup" })
 public class SignUpServlet extends HttpServlet {
@@ -30,7 +36,7 @@ public class SignUpServlet extends HttpServlet {
 		request.getRequestDispatcher("signup.jsp").forward(request, response);
 	}
 
-/*	@Override
+	@Override
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
 
@@ -40,11 +46,13 @@ public class SignUpServlet extends HttpServlet {
 		if (isValid(request, messages) == true) {
 
 			User user = new User();
-			user.setName(request.getParameter("name"));
 			user.setAccount(request.getParameter("account"));
 			user.setPassword(request.getParameter("password"));
-			user.setEmail(request.getParameter("email"));
-			user.setDescription(request.getParameter("description"));
+			user.setName(request.getParameter("name"));
+
+			user.setBranchId(Integer.parseInt(request.getParameter("branchId")));
+
+			user.setPositionId(Integer.parseInt(request.getParameter("positionId")));
 
 			new UserService().register(user);
 
@@ -58,6 +66,13 @@ public class SignUpServlet extends HttpServlet {
 	private boolean isValid(HttpServletRequest request, List<String> messages) {
 		String account = request.getParameter("account");
 		String password = request.getParameter("password");
+		String name =request.getParameter("name");
+		int branchId = Integer.parseInt(request.getParameter("branchId"));
+		//後でバリデーションでHTMLをいじられないようにする
+		int positionId = Integer.parseInt(request.getParameter("positionId"));
+		//後でバリデーションでHTMLをいじられないようにする
+		System.out.println(branchId);
+		System.out.println(positionId);
 
 		if (StringUtils.isEmpty(account) == true) {
 			messages.add("アカウント名を入力してください");
@@ -65,12 +80,15 @@ public class SignUpServlet extends HttpServlet {
 		if (StringUtils.isEmpty(password) == true) {
 			messages.add("パスワードを入力してください");
 		}
+		if (StringUtils.isEmpty(name) == true) {
+			messages.add("名前を入力してください");
+		}
 		if (messages.size() == 0) {
 			return true;
 		} else {
 			return false;
 		}
-	}*/
+	}
 
 }
 

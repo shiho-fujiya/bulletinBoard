@@ -32,8 +32,8 @@ public class UserDao {
 			List<User> userList = toUserList(rs);
 			if (userList.isEmpty() == true) {
 				return null;
-			} else if (2 <= userList.size()) {
-				throw new IllegalStateException("2 <= userList.size()");
+			} else if (5 <= userList.size()) {
+				throw new IllegalStateException("5 <= userList.size()");
 			} else {
 				return userList.get(0);
 			}
@@ -83,13 +83,12 @@ public class UserDao {
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
-			sql.append("INSERT INTO user ( ");
+			sql.append("INSERT INTO users ( ");
 			sql.append("account");
 			sql.append(", password");
 			sql.append(", name");
 			sql.append(", branch_id");
 			sql.append(", position_id");
-			sql.append(", operation");
 			sql.append(", insert_date");
 			sql.append(", update_date");
 			sql.append(") VALUES (");
@@ -105,7 +104,7 @@ public class UserDao {
 			ps = connection.prepareStatement(sql.toString());
 
 			ps.setString(1, user.getAccount());
-			ps.setString	(2, user.getPassword());
+			ps.setString(2, user.getPassword());
 			ps.setString(3, user.getName());
 			ps.setInt	(4, user.getBranchId());
 			ps.setInt	(5, user.getPositionId());
@@ -172,7 +171,7 @@ public class UserDao {
 			if (userList.isEmpty() == true) {
 				return null;
 			} else if (2 <= userList.size()) {
-				throw new IllegalStateException("2 <= userList.size()");
+				throw new IllegalStateException("5 <= userList.size()");
 			} else {
 				return userList.get(0);
 			}

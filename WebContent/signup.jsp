@@ -33,18 +33,18 @@
 
 	<label for="branch_id">支店</label>
 		<div class="branches">
-			<select name="branches">
+			<select name="branchId">
 				<c:forEach items="${branches}" var="branch">
-					<option value="${branch.name}">${branch.name}</option>
+					<option value="${branch.id}">${branch.name}</option>
 				</c:forEach>
 			</select>
 		</div>
 
 	<label for="position_id">部署・役職</label>
 		<div class="positions">
-			<select name="positions">
+			<select name="positionId">
 				<c:forEach items="${positions}" var="position">
-					<option value="${position.name}">${position.name}</option>
+					<option value="${position.id}">${position.name}</option>
 				</c:forEach>
 			</select>
 		</div>

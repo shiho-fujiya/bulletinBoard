@@ -20,7 +20,7 @@ public class BranchesService {
 			List<Branches> ret = branchesDao.getBranches(connection);
 
 			commit(connection);
-			System.out.println(ret);
+			//System.out.println(ret);
 			return ret;
 		} catch (RuntimeException e) {
 			rollback(connection);
