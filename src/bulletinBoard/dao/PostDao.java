@@ -38,6 +38,7 @@ public class PostDao {
 			ps.setString(2, post.getSubject());
 			ps.setString(3, post.getCategory());
 			ps.setString(4, post.getText());
+			System.out.println(ps.toString());
 
 			ps.executeUpdate();
 		} catch (SQLException e) {
@@ -46,5 +47,4 @@ public class PostDao {
 			close(ps);
 		}
 	}
-
 }
