@@ -69,6 +69,5 @@ public class Post implements Serializable {
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
 	}
-
 }
 
