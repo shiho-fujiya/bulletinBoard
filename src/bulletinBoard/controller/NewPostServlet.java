@@ -19,7 +19,7 @@ import bulletinBoard.beans.UserPost;
 import bulletinBoard.service.PostService;
 import bulletinBoard.service.UserService;
 
-@WebServlet(urlPatterns = { "/newPost" })
+@WebServlet(urlPatterns = { "/post" })
 public class NewPostServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -83,19 +83,22 @@ public class NewPostServlet extends HttpServlet {
 	private boolean isValid(HttpServletRequest request, List<String> messages) {
 
 		String subject = request.getParameter("subject");
+		System.out.println(subject);
 		String category = request.getParameter("category");
+		System.out.println(category);
 		String text = request.getParameter("text");
+		System.out.println(text);
 
 		if (StringUtils.isEmpty(subject) == true) {
 			messages.add("入力してください");
 		}
-		if (1000 < subject.length()) {
+		if (50< subject.length()) {
 			messages.add("50文字以下で入力してください");
 		}
 		if (StringUtils.isEmpty(category) == true) {
 			messages.add("入力してください");
 		}
-		if (1000 < category.length()) {
+		if (10 < category.length()) {
 			messages.add("10文字以下で入力してください");
 		}
 		if (StringUtils.isEmpty(text) == true) {

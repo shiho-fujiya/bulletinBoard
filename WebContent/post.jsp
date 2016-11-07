@@ -21,12 +21,15 @@
 	</div>
 	<c:remove var="errorMessages" scope="session"/>
 </c:if>
-<form action="newPost" method="post"><br />
+<form action="post" method="post"><br />
 	<label for="subject">件名</label>
 	<input name="subject" id="subject"/>（50文字以下で入力してください）<br />
 
+
 	<label for="text">本文</label>
-	<input name="text" id="text"/><br /> (1000文字以下で入力してください)
+	<textarea name="text" cols="100" rows="5" class="tweet-box"></textarea>
+	(1000文字以下で入力してください)<br />
+
 
 	<label for="category">カテゴリー</label>
 	<input name="category" id="category"/>（10文字以下で入力してください）<br />
@@ -35,7 +38,6 @@
 
 
 </form>
-<div class="copyright">Copyright(c)Shiho Fujiya</div>
 </div>
 </body>
 </html>
