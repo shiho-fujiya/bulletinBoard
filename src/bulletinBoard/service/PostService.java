@@ -9,7 +9,6 @@ import java.util.List;
 import bulletinBoard.beans.Post;
 import bulletinBoard.beans.UserPost;
 import bulletinBoard.dao.PostDao;
-//import bulletinBoard.beans.UserPost;
 import bulletinBoard.dao.UserPostDao;
 
 public class PostService {

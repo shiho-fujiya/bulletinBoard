@@ -67,12 +67,8 @@ public class SignUpServlet extends HttpServlet {
 		String account = request.getParameter("account");
 		String password = request.getParameter("password");
 		String name =request.getParameter("name");
-		int branchId = Integer.parseInt(request.getParameter("branchId"));
-		//後でバリデーションでHTMLをいじられないようにする
-		int positionId = Integer.parseInt(request.getParameter("positionId"));
-		//後でバリデーションでHTMLをいじられないようにする
-		System.out.println(branchId);
-		System.out.println(positionId);
+		String branchId = request.getParameter("branchId");
+		String positionId =request.getParameter("positionId");
 
 		if (StringUtils.isEmpty(account) == true) {
 			messages.add("アカウント名を入力してください");
@@ -83,6 +79,22 @@ public class SignUpServlet extends HttpServlet {
 		if (StringUtils.isEmpty(name) == true) {
 			messages.add("名前を入力してください");
 		}
+		if (StringUtils.isEmpty(branchId) == true) {
+			messages.add("勤務先を選択してください");
+		} else {
+			Integer.parseInt(request.getParameter("branchId"));
+		}
+		if (StringUtils.isEmpty(positionId) == true) {
+			messages.add("部署・役職を選択してください");
+		} else {
+			Integer.parseInt(request.getParameter("positionId"));
+		}
+
+		//int branchId = Integer.parseInt(request.getParameter("branchId"));
+		//後でバリデーションでHTMLをいじられないようにする
+		//int positionId = Integer.parseInt(request.getParameter("positionId"));
+		//後でバリデーションでHTMLをいじられないようにする
+
 		if (messages.size() == 0) {
 			return true;
 		} else {
