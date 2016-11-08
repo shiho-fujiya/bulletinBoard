@@ -34,7 +34,7 @@
 	<label for="category">カテゴリー</label>
 	<input name="category" id="category"/>（10文字以下で入力してください）<br />
 
-	<input type="submit" value="登録" /> <br />
+	<input type="submit" value="投稿" /> <br />
 
 
 </form>

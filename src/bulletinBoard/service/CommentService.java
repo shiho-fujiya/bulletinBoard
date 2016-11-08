@@ -6,23 +6,23 @@ import static bulletinBoard.utils.DBUtil.*;
 import java.sql.Connection;
 import java.util.List;
 
-import bulletinBoard.beans.Post;
-import bulletinBoard.beans.UserPost;
-import bulletinBoard.dao.PostDao;
-import bulletinBoard.dao.UserPostDao;
+import bulletinBoard.beans.Comment;
+import bulletinBoard.beans.UserComment;
+import bulletinBoard.dao.CommentDao;
+import bulletinBoard.dao.UserCommentDao;
 
-public class PostService {
+public class CommentService {
 
 	private static final int LIMIT_NUM = 1000;
 
-	public void register(Post post) {
+	public void register(Comment comment) {
 
 		Connection connection = null;
 		try {
 			connection = getConnection();
 
-			PostDao postDao = new PostDao();
-			postDao.insert(connection, post);
+			CommentDao commentDao = new CommentDao();
+			commentDao.insert(connection, comment);
 
 			commit(connection);
 		} catch (RuntimeException e) {
@@ -35,16 +35,15 @@ public class PostService {
 			close(connection);
 		}
 	}
-	public List<UserPost> getPost(Integer userId) {
+	public List<UserComment> getPost(Integer userId) {
 
 		Connection connection = null;
 		try {
 			connection = getConnection();
 
-			UserPostDao postDao = new UserPostDao();
-			List<UserPost> ret = postDao.getUserPost(connection, userId, LIMIT_NUM);
+			UserCommentDao commentDao = new UserCommentDao();
+			List<UserComment> ret = commentDao.getUserComment(connection, userId, LIMIT_NUM);
 
-			commit(connection);
 
 			return ret;
 		} catch (RuntimeException e) {
