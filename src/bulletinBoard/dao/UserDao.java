@@ -121,7 +121,7 @@ public class UserDao {
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
-			sql.append("UPDATE user SET");
+			sql.append("UPDATE users SET");
 			sql.append("  account = ?");
 			sql.append(", password = ?");
 			sql.append(", name = ?");
@@ -160,7 +160,7 @@ public class UserDao {
 
 		PreparedStatement ps = null;
 		try {
-			String sql = "SELECT * FROM user WHERE id = ?";
+			String sql = "SELECT * FROM users WHERE id = ?";
 
 			ps = connection.prepareStatement(sql);
 			ps.setInt(1, id);

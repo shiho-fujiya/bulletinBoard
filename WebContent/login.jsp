@@ -34,7 +34,6 @@
 	<input type="submit" value="ログイン" /> <br />
 	<a href="./">戻る</a>
 </form>
-<div class="copyright">Copyright(c)Shiho Fujiya</div>
 </div>
 </body>
 </html>

@@ -21,7 +21,7 @@
 
 <div class="main-contents">
 		<a href="post">新規投稿</a>
-		<a href="settings">ユーザー管理</a>
+		<a href="management">ユーザー管理</a>
 		<a href="logout">ログアウト</a>
 
 <div class="header">
@@ -41,7 +41,7 @@
 <c:if test="${ not empty user }">
 	<div class="profile">
 		<a href="./?user_id=${user.id}"></a>
-			<div class="name"><h2><c:out value="${ name }" /></h2></div>
+			<div class="name"><h2><c:out value="${users.name }" /></h2></div>
 			<div class="account">
 				<a href="./?user_id=${users.id }">@<c:out value="${ users.account }" /></a>
 			</div>
@@ -61,15 +61,14 @@
 			<div class="text"><c:out value="${post.text}" /></div>
 			<div class="date"><fmt:formatDate value="${post.insertDate}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
 
-
 			<c:forEach items="${comments}" var="comment">
-				<div class="account-name">
-					<span class="name"><c:out value="${comment.name}" /></span>
-				</div>
-				<c:if test="${post.id}">
+
+				<c:if test="${post.id == comment.postId}">
+					<div class="name"><c:out value="${comment.name}" /></div>
 					<div class="text"><c:out value="${comment.text}" /></div>
+					<div class="date"><fmt:formatDate value="${comment.insertDate}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
 				</c:if>
-				<div class="date"><fmt:formatDate value="${comment.insertDate}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
+
 			</c:forEach>
 		<div class="comment"></div>
 

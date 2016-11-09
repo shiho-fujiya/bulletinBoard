@@ -21,16 +21,9 @@ public class UserPostDao {
 		try {
 			StringBuilder sql = new StringBuilder();
 			sql.append("SELECT * FROM users_posts ");
-			if (userId != null) {
-				sql.append("SELECT * FROM user_id = ?");
-			}
 			sql.append("ORDER BY insert_date DESC limit " + num);
 
 			ps = connection.prepareStatement(sql.toString());
-
-			if (userId != null) {
-				ps.setInt(1, userId);
-			}
 
 			ResultSet rs = ps.executeQuery();
 			List<UserPost> ret = toUserPostList(rs);
