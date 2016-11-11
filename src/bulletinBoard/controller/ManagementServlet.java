@@ -40,6 +40,6 @@ public class ManagementServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-
+		boolean operation = request.getParameter("operation");
 	}
 }
