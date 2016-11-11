@@ -6,11 +6,12 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>ユーザー登録</title>
-	<link href="./css/style.css" rel="stylesheet" type="text/css">
+	<title>${account}の設定</title>
+	<link href="css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div class="main-contents">
+
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">
 		<ul>
@@ -21,55 +22,40 @@
 	</div>
 	<c:remove var="errorMessages" scope="session"/>
 </c:if>
-<form action="signup" method="post"><br />
+
+<form action="settings" method="post" enctype="multipart/form-data"><br />
+	<label for="name">名前</label>
+	<input name="name" value="${editUser.name}" id="name"/><br />
+
 	<label for="account">アカウント名</label>
-	<input name="account" id="account"/>（半角英数字で6文字以上20文字以下）<br />
+	<input name="account" value="${editUser.account}" /><br />
 
 	<label for="password">パスワード</label>
-	<input name="password" type="password" id="password"/>（記号を含む全ての半角文字で6文字以上255文字以下）<br />
-
-	<label for="name">名前</label>
-	<input name="name" id="name"/><br />
+	<input name="password" type="password" id="password"/> <br />
 
 	<label for="branch_id">所属</label>
 		<div class="branches">
 			<select name="branchId">
-<<<<<<< HEAD
-				<option value="">選択してください</option>
-					<c:forEach items="${branches}" var="branch">
-						<option value="${branch.id}">${branch.name}</option>
-					</c:forEach>
-=======
 			<option value="">選択してください</option>
 				<c:forEach items="${branches}" var="branch">
 					<option value="${branch.id}">${branch.name}</option>
 				</c:forEach>
->>>>>>> 58f12b43da739fa0c388cd201b9253e311f07d3e
 			</select>
 		</div>
 
-	<label for="position_id">部署・役職</label>
+		<label for="position_id">部署・役職</label>
 		<div class="positions">
 			<select name="positionId">
-<<<<<<< HEAD
-				<option value="">選択してください</option>
-					<c:forEach items="${positions}" var="position">
-						<option value="${position.id}">${position.name}</option>
-					</c:forEach>
-=======
 			<option value="">選択してください</option>
 				<c:forEach items="${positions}" var="position">
 					<option value="${position.id}">${position.name}</option>
 				</c:forEach>
->>>>>>> 58f12b43da739fa0c388cd201b9253e311f07d3e
 			</select>
 		</div>
 
 	<input type="submit" value="登録" /> <br />
-
-
+	<a href="./">戻る</a>
 </form>
-<div class="copyright">Copyright(c)Shiho Fujiya</div>
 </div>
 </body>
 </html>
