@@ -44,19 +44,19 @@
 		<th>名前</th><th>ログインID</th><th>所属</th><th>役職</th><th>アカウント停止/復活</th>
 	</tr>
 
-			<c:forEach items="${ users }" var="user">
-				<tr>
-					<td>${ user.name }</td>
-					<td>${ user.account }</td>
-
-						<c:forEach items="${ branches }" var="branch">
-							<c:if test="${ user.branchId == branch.id }"><td>${ branch.name }</td></c:if>
-						</c:forEach>
-
-					<td>${ user.positionId }</td>
-					<td>${ user.operation }</td>
-				</tr>
+	<c:forEach items="${ users }" var="user">
+		<tr>
+			<td>${ user.name }</td>
+			<td>${ user.account }</td>
+			<c:forEach items="${ branches }" var="branch">
+				<c:if test="${ user.branchId == branch.id }"><td>${ branch.name }</td></c:if>
 			</c:forEach>
+			<c:forEach items="${ positions }" var="position">
+				<c:if test="${ user.positionId == position.id }"><td>${ position.name }</td></c:if>
+			</c:forEach>
+			<td>${ user.operation }</td>
+		</tr>
+	</c:forEach>
 
 </table>
 

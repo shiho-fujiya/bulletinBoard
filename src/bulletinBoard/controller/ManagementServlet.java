@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bulletinBoard.beans.Branches;
+import bulletinBoard.beans.Positions;
 import bulletinBoard.beans.User;
 import bulletinBoard.service.BranchesService;
+import bulletinBoard.service.PositionsService;
 import bulletinBoard.service.UserService;
 
 @WebServlet(urlPatterns = { "/management"})
@@ -25,10 +27,12 @@ public class ManagementServlet extends HttpServlet {
 		List<User> users = new UserService().getUsers();
 		//boolean isShowPostsForm;
 		List<Branches> branches = new BranchesService().getBranches();
+		List<Positions> positions = new PositionsService().getPositions();
 
 		//System.out.println(users);
 		request.setAttribute("users", users);
 		request.setAttribute("branches", branches);
+		request.setAttribute("positions", positions);
 
 		request.getRequestDispatcher("/management.jsp").forward(request, response);
 
