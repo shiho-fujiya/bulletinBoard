@@ -39,7 +39,7 @@
 	</div>
 </c:if>
 
-<table>
+<table border="8">
 	<tr>
 		<th>名前</th><th>ログインID</th><th>所属</th><th>役職</th><th>アカウント停止/復活</th>
 	</tr>
@@ -54,7 +54,11 @@
 			<c:forEach items="${ positions }" var="position">
 				<c:if test="${ user.positionId == position.id }"><td>${ position.name }</td></c:if>
 			</c:forEach>
-			<td>${ user.operation }</td>
+			<td>
+			<input type="hidden" name="operation" value="${ user.operation == true }" />
+			<input type="hidden" name="operation" value="${ user.operation == false }" />
+			<input type="submit" value="${user.operation ? '復活' : '停止'}" />
+			</td>
 		</tr>
 	</c:forEach>
 

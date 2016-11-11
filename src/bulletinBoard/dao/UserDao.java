@@ -202,4 +202,35 @@ public class UserDao {
 			close(ps);
 		}
 	}
+
+	public void updateBool(Connection connection, User user) {
+
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("UPDATE users SET");
+			sql.append(", operation = ?");
+			sql.append(", update_date = CURRENT_TIMESTAMP");
+			sql.append(" WHERE");
+			sql.append(" id = ?");
+			sql.append(" AND");
+			sql.append(" update_date = ?");
+
+			ps = connection.prepareStatement(sql.toString());
+
+			ps.setInt(1, user.getPositionId());
+			ps.setInt(2, user.getId());
+			ps.setTimestamp(3,new Timestamp(user.getUpdateDate().getTime()));
+
+			int count = ps.executeUpdate();
+			if (count == 0) {
+				throw new NoRowsUpdatedRuntimeException();
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+
+	}
 }

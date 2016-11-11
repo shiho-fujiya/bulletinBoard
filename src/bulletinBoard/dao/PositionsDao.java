@@ -23,7 +23,7 @@ public class PositionsDao {
 			sql.append("SELECT * FROM positions ");
 
 			ps = connection.prepareStatement(sql.toString());
-			System.out.println(ps);
+			//System.out.println(ps);
 
 			ResultSet rs = ps.executeQuery();
 			List<Positions> ret = toPositionsList(rs);
