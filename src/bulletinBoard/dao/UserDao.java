@@ -181,4 +181,25 @@ public class UserDao {
 		}
 	}
 
+	public List<User> getUsers(Connection connection) {
+
+		PreparedStatement ps = null;
+		try {
+			String sql = "SELECT * FROM users";
+
+			ps = connection.prepareStatement(sql);
+
+			ResultSet rs = ps.executeQuery();
+			List<User> userList = toUserList(rs);
+			if (userList.isEmpty() == true) {
+				return null;
+			} else {
+				return userList;
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
 }

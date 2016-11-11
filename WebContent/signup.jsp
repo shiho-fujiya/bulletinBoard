@@ -34,20 +34,20 @@
 	<label for="branch_id">所属</label>
 		<div class="branches">
 			<select name="branchId">
-			<option value="">選択してください</option>
-				<c:forEach items="${branches}" var="branch">
-					<option value="${branch.id}">${branch.name}</option>
-				</c:forEach>
+				<option value="">選択してください</option>
+					<c:forEach items="${branches}" var="branch">
+						<option value="${branch.id}">${branch.name}</option>
+					</c:forEach>
 			</select>
 		</div>
 
 	<label for="position_id">部署・役職</label>
 		<div class="positions">
 			<select name="positionId">
-			<option value="">選択してください</option>
-				<c:forEach items="${positions}" var="position">
-					<option value="${position.id}">${position.name}</option>
-				</c:forEach>
+				<option value="">選択してください</option>
+					<c:forEach items="${positions}" var="position">
+						<option value="${position.id}">${position.name}</option>
+					</c:forEach>
 			</select>
 		</div>
 

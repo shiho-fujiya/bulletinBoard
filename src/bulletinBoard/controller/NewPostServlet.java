@@ -83,11 +83,11 @@ public class NewPostServlet extends HttpServlet {
 	private boolean isValid(HttpServletRequest request, List<String> messages) {
 
 		String subject = request.getParameter("subject");
-		System.out.println(subject);
+		//System.out.println(subject);
 		String category = request.getParameter("category");
-		System.out.println(category);
+		//System.out.println(category);
 		String text = request.getParameter("text");
-		System.out.println(text);
+		//System.out.println(text);
 
 		if (StringUtils.isEmpty(subject) == true) {
 			messages.add("入力してください");

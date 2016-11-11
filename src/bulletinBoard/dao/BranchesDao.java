@@ -23,7 +23,7 @@ public class BranchesDao {
 			sql.append("SELECT * FROM branches ");
 
 			ps = connection.prepareStatement(sql.toString());
-			System.out.println(ps);
+			//System.out.println(ps);
 
 			ResultSet rs = ps.executeQuery();
 			List<Branches> ret = toBranchesList(rs);
@@ -57,5 +57,4 @@ public class BranchesDao {
 			close(rs);
 		}
 	}
-
 }
