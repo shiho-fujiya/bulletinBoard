@@ -38,10 +38,6 @@
 					<c:forEach items="${branches}" var="branch">
 						<option value="${branch.id}">${branch.name}</option>
 					</c:forEach>
-			<option value="">選択してください</option>
-				<c:forEach items="${branches}" var="branch">
-					<option value="${branch.id}">${branch.name}</option>
-				</c:forEach>
 			</select>
 		</div>
 
@@ -52,11 +48,6 @@
 					<c:forEach items="${positions}" var="position">
 						<option value="${position.id}">${position.name}</option>
 					</c:forEach>
-
-			<option value="">選択してください</option>
-				<c:forEach items="${positions}" var="position">
-					<option value="${position.id}">${position.name}</option>
-				</c:forEach>
 			</select>
 		</div>
 

@@ -28,9 +28,12 @@ public class SettingsServlet extends HttpServlet {
 		SettingService settingService = new SettingService();
 		User user = settingService.settings(userId);
 		System.out.println(userId);
-		System.out.println(user);
+		System.out.println(user.getName());
 
-		request.getRequestDispatcher("settings.jsp").forward(request, response);
+		request.setAttribute("userId", userId);
+		request.setAttribute("user", user);
+
+		request.getRequestDispatcher("/settings.jsp").forward(request, response);
 	}
 
 	@Override
