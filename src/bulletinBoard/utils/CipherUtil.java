@@ -17,5 +17,4 @@ public class CipherUtil {
 			throw new RuntimeException(e);
 		}
 	}
-
 }

@@ -21,7 +21,6 @@
 
 <div class="main-contents">
 	<a href="signup">ユーザー新規登録</a>
-	<a href="settings">ユーザー編集</a>
 	<a href="home">ホーム</a>
 
 <div class="header">
@@ -41,7 +40,7 @@
 
 <table border="8">
 	<tr>
-		<th>名前</th><th>ログインID</th><th>所属</th><th>役職</th><th>アカウント停止/復活</th>
+		<th>名前</th><th>ログインID</th><th>所属</th><th>役職</th><th>アカウント停止/復活</th><th>編集</th>
 	</tr>
 
 	<c:forEach items="${ users }" var="user">
@@ -54,10 +53,30 @@
 			<c:forEach items="${ positions }" var="position">
 				<c:if test="${ user.positionId == position.id }"><td>${ position.name }</td></c:if>
 			</c:forEach>
+
+
 			<td>
-			<input type="hidden" name="operation" value="${ user.operation == true }" />
-			<input type="hidden" name="operation" value="${ user.operation == false }" />
-			<input type="submit" value="${user.operation ? '復活' : '停止'}" />
+			<!--  -->
+			<form action="management" method="post">
+				<input type="hidden" name="id" value="${user.id}">
+				<c:if test="${ user.operation == true }">
+					<input type="hidden" name="operation" value="false" />
+					<input type="submit" value="停止" />
+				</c:if>
+				<c:if test="${ user.operation == false }">
+					<input type="hidden" name="operation" value="true" />
+					<input type="submit" value="復活" />
+				</c:if>
+
+			<!--  -->
+			</form>
+			</td>
+
+			<td>
+				<form action="settings" method="get">
+					<input type="hidden" name="userId" value="${ user.id }">
+					<input type="submit" value="編集" />
+				</form>
 			</td>
 		</tr>
 	</c:forEach>

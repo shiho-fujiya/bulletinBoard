@@ -14,8 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang.StringUtils;
 
 import bulletinBoard.beans.User;
-import bulletinBoard.exception.NoRowsUpdatedRuntimeException;
-import bulletinBoard.service.UserService;
+import bulletinBoard.service.SettingService;
 
 @WebServlet(urlPatterns = { "/settings" })
 public class SettingsServlet extends HttpServlet {
@@ -25,13 +24,11 @@ public class SettingsServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
-		HttpSession session = request.getSession();
-		User loginUser = (User) session.getAttribute("loginUser");
-
-		if (session.getAttribute("editUser") == null) {
-			User editUser = new UserService().getUser(loginUser.getId());
-			session.setAttribute("editUser", editUser);
-		}
+		int userId = Integer.parseInt(request.getParameter("userId"));
+		SettingService settingService = new SettingService();
+		User user = settingService.settings(userId);
+		System.out.println(userId);
+		System.out.println(user);
 
 		request.getRequestDispatcher("settings.jsp").forward(request, response);
 	}
@@ -40,30 +37,24 @@ public class SettingsServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
-		List<String> messages = new ArrayList<String>();
+		int userId = Integer.parseInt(request.getParameter("id"));
 
+		SettingService settingService = new SettingService();
+		User user = settingService.settings(userId);
 		HttpSession session = request.getSession();
+		if (user != null) {
 
-		User editUser = getEditUser(request);
-		session.setAttribute("editUser", editUser);
+			session.setAttribute("user", user);
 
-		if (isValid(request, messages) == true) {
+			response.sendRedirect("management");
 
-			try {
-				new UserService().update(editUser);
-			} catch (NoRowsUpdatedRuntimeException e) {
-				session.removeAttribute("editUser");
-				messages.add("他の人によって更新されています。最新のデータを表示しました。データを確認してください。");
-				session.setAttribute("errorMessages", messages);
-				response.sendRedirect("settings");
-			}
-
-			session.setAttribute("loginUser", editUser);
-			session.removeAttribute("editUser");
-
-			response.sendRedirect("./");
 		} else {
+
+			List<String> messages = new ArrayList<String>();
 			session.setAttribute("errorMessages", messages);
+			session.setAttribute("userId", userId);
+			session.removeAttribute("user");
+
 			response.sendRedirect("settings");
 		}
 	}

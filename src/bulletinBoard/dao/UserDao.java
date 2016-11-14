@@ -70,6 +70,7 @@ public class UserDao {
 				user.setUpdateDate(updateDate);
 
 				ret.add(user);
+				//System.out.println(user);
 			}
 			return ret;
 		} finally {
@@ -88,6 +89,7 @@ public class UserDao {
 			sql.append(", name");
 			sql.append(", branch_id");
 			sql.append(", position_id");
+			sql.append(", operation");
 			sql.append(", insert_date");
 			sql.append(", update_date");
 			sql.append(") VALUES (");
@@ -96,6 +98,7 @@ public class UserDao {
 			sql.append(", ?");
 			sql.append(", ?");
 			sql.append(", ?");
+			sql.append(", 1");
 			sql.append(", CURRENT_TIMESTAMP");
 			sql.append(", CURRENT_TIMESTAMP");
 			sql.append(")");
@@ -156,14 +159,15 @@ public class UserDao {
 
 	}
 
-	public User getUser(Connection connection, int id) {
+	public User getUser(Connection connection, int userId) {
 
 		PreparedStatement ps = null;
 		try {
 			String sql = "SELECT * FROM users WHERE id = ?";
 
 			ps = connection.prepareStatement(sql);
-			ps.setInt(1, id);
+			ps.setInt(1, userId);
+
 
 			ResultSet rs = ps.executeQuery();
 			List<User> userList = toUserList(rs);
@@ -203,24 +207,23 @@ public class UserDao {
 		}
 	}
 
-	public void updateBool(Connection connection, User user) {
+	public Boolean updateBool(Connection connection, int id, boolean operation) {
 
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
 			sql.append("UPDATE users SET");
-			sql.append(", operation = ?");
+			sql.append("  operation = ?");
 			sql.append(", update_date = CURRENT_TIMESTAMP");
 			sql.append(" WHERE");
 			sql.append(" id = ?");
-			sql.append(" AND");
-			sql.append(" update_date = ?");
+
 
 			ps = connection.prepareStatement(sql.toString());
 
-			ps.setInt(1, user.getPositionId());
-			ps.setInt(2, user.getId());
-			ps.setTimestamp(3,new Timestamp(user.getUpdateDate().getTime()));
+			ps.setBoolean(1, operation);
+			ps.setInt(2, id);
+			//System.out.println(ps);
 
 			int count = ps.executeUpdate();
 			if (count == 0) {
@@ -231,6 +234,6 @@ public class UserDao {
 		} finally {
 			close(ps);
 		}
-
+		return true;
 	}
 }
