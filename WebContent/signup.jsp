@@ -55,7 +55,6 @@
 
 
 </form>
-<div class="copyright">Copyright(c)Shiho Fujiya</div>
 </div>
 </body>
 </html>

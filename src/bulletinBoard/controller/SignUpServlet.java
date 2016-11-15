@@ -49,9 +49,7 @@ public class SignUpServlet extends HttpServlet {
 			user.setAccount(request.getParameter("account"));
 			user.setPassword(request.getParameter("password"));
 			user.setName(request.getParameter("name"));
-
 			user.setBranchId(Integer.parseInt(request.getParameter("branchId")));
-
 			user.setPositionId(Integer.parseInt(request.getParameter("positionId")));
 
 			new UserService().register(user);

@@ -130,12 +130,13 @@ public class UserDao {
 			sql.append(", name = ?");
 			sql.append(", branch_id = ?");
 			sql.append(", position_id = ?");
-			sql.append(", operation = ?");
+			//sql.append(", operation = ?");
 			sql.append(", update_date = CURRENT_TIMESTAMP");
 			sql.append(" WHERE");
 			sql.append(" id = ?");
 			sql.append(" AND");
 			sql.append(" update_date = ?");
+			System.out.println(sql);
 
 			ps = connection.prepareStatement(sql.toString());
 

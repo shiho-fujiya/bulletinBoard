@@ -6,12 +6,11 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>${user.account}の設定</title>
+	<title>${user.name}の設定</title>
 	<link href="css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div class="main-contents">
-
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">
 		<ul>
@@ -23,12 +22,12 @@
 	<c:remove var="errorMessages" scope="session"/>
 </c:if>
 
-<form action="settings" method="post" enctype="multipart/form-data"><br />
+<form action="settings" method="post"><br />
 	<label for="name">名前</label>
 	<input name="name" value="${user.name}" id="name"/><br />
 
 	<label for="account">アカウント名</label>
-	<input name="account" value="${user.account}" /><br />
+	<input name="account" value="${user.account}" id="account" /><br />
 
 	<label for="password">パスワード</label>
 	<input name="password" type="password" id="password"/> <br />
@@ -52,7 +51,9 @@
 					</c:forEach>
 			</select>
 		</div>
+
 	<input type="submit" value="登録" /> <br />
+
 	<a href="./">戻る</a>
 </form>
 </div>
