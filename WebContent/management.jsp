@@ -26,18 +26,6 @@
 <div class="header">
 </div>
 
-<c:if test="${ not empty user }">
-	<div class="profile">
-		<a href="./?user_id=${user.id}"></a>
-			<div class="name"><h2><c:out value="${ users.name }" /></h2></div>
-			<div class="account">
-				<a href="./?user_id=${users.id }">@<c:out value="${ users.account }" /></a>
-			</div>
-			<div class="account">
-			</div>
-	</div>
-</c:if>
-
 <table border="8">
 	<tr>
 		<th>名前</th><th>ログインID</th><th>所属</th><th>役職</th><th>アカウント停止/復活</th><th>編集</th>
