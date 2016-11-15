@@ -82,7 +82,7 @@ public class ManagementServlet extends HttpServlet {
 //		}
 	}
 
-	private boolean isValid(HttpServletRequest request, List<String> messages) {
+	/*private boolean isValid(HttpServletRequest request, List<String> messages) {
 
 		String operation = request.getParameter("operation");
 		System.out.println(operation);
@@ -90,5 +90,5 @@ public class ManagementServlet extends HttpServlet {
 		System.out.println(id);
 
 		return true;
-	}
+	}*/
 }

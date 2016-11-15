@@ -47,6 +47,7 @@
 			<!--  -->
 			<form action="management" method="post">
 				<input type="hidden" name="id" value="${user.id}">
+				<c:if test="${ user.id != loginUser.id }">
 				<c:if test="${ user.operation == true }">
 					<input type="hidden" name="operation" value="false" />
 					<input type="submit" value="停止" />
@@ -54,6 +55,7 @@
 				<c:if test="${ user.operation == false }">
 					<input type="hidden" name="operation" value="true" />
 					<input type="submit" value="復活" />
+				</c:if>
 				</c:if>
 
 			<!--  -->

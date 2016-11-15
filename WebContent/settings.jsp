@@ -32,6 +32,9 @@
 	<label for="password">パスワード</label>
 	<input name="password" type="password" id="password"/> <br />
 
+	<label for="confirmation">確認用パスワード</label>
+	<input name="confirmation" type="password" id="confirmation"/> <br />
+
 	<label for="branch_id">所属</label>
 		<div class="branches">
 			<select name="branchId">

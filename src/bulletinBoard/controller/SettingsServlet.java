@@ -31,10 +31,12 @@ public class SettingsServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		int userId = Integer.parseInt(request.getParameter("userId"));
+		System.out.println(userId);
+
 		SettingService settingService = new SettingService();
 		User editUser = settingService.settings(userId);
 		//System.out.println(userId);
-		//System.out.println(user.getName());
+		System.out.println(editUser.getName());
 		List<Branches> branches = new BranchesService().getBranches();
 		List<Positions> positions = new PositionsService().getPositions();
 
@@ -44,7 +46,7 @@ public class SettingsServlet extends HttpServlet {
 		request.setAttribute("branches", branches);
 		request.setAttribute("positions", positions);
 
-		request.getRequestDispatcher("/settings.jsp").forward(request, response);
+		request.getRequestDispatcher("settings.jsp").forward(request, response);
 	}
 
 	@Override
@@ -72,7 +74,7 @@ public class SettingsServlet extends HttpServlet {
 			response.sendRedirect("management");
 		} else {
 			session.setAttribute("errorMessages", messages);
-			response.sendRedirect("settings");
+			response.sendRedirect("settings?userId=" + editUser.getId());
 		}
 	}
 
@@ -95,6 +97,7 @@ public class SettingsServlet extends HttpServlet {
 	private boolean isValid(HttpServletRequest request, List<String> messages) {
 		String account = request.getParameter("account");
 		String password = request.getParameter("password");
+		String confirmation = request.getParameter("confirmation");
 		String name =request.getParameter("name");
 		String branchId = request.getParameter("branchId");
 		String positionId =request.getParameter("positionId");
@@ -102,8 +105,8 @@ public class SettingsServlet extends HttpServlet {
 		if (StringUtils.isEmpty(account) == true) {
 			messages.add("アカウント名を入力してください");
 		}
-		if (StringUtils.isEmpty(password) == true) {
-			messages.add("パスワードを入力してください");
+		if (password != confirmation) {
+			messages.add("パスワードが一致していません");
 		}
 		if (StringUtils.isEmpty(name) == true) {
 			messages.add("名前を入力してください");
