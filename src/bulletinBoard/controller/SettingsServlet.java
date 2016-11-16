@@ -31,12 +31,11 @@ public class SettingsServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		int userId = Integer.parseInt(request.getParameter("userId"));
-		System.out.println(userId);
 
 		SettingService settingService = new SettingService();
 		User editUser = settingService.settings(userId);
 		//System.out.println(userId);
-		System.out.println(editUser.getName());
+		//System.out.println(editUser.getName());
 		List<Branches> branches = new BranchesService().getBranches();
 		List<Positions> positions = new PositionsService().getPositions();
 

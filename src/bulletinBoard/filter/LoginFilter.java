@@ -22,7 +22,7 @@ public class LoginFilter implements Filter{
 
       String target = ((HttpServletRequest)request).getRequestURI();
       String[] urlBody = target.split("/");
-
+      //要素数から数えるので-1しないと全ての要素が取れない
       if(!urlBody[urlBody.length - 1].matches("login")) {
           User user = (User) ((HttpServletRequest)request).getSession().getAttribute("loginUser");
           if (user == null) {
