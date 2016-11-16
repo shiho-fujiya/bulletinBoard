@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bulletinBoard.beans.Comment;
-import bulletinBoard.beans.Post;
 import bulletinBoard.beans.User;
 import bulletinBoard.beans.UserComment;
 import bulletinBoard.beans.UserPost;
@@ -46,28 +44,6 @@ public class HomeServlet extends HttpServlet {
 
 		request.getRequestDispatcher("/home.jsp").forward(request, response);
 
-	}
-
-	@Override
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws IOException, ServletException {
-
-		Post post = new Post();
-		//getParameter忘れないで!!
-		int postId = Integer.parseInt(request.getParameter("postId"));
-		post.setId(postId);
-
-		new PostService().delete(post);
-
-		Comment comment = new Comment();
-		System.out.println(comment);
-		int id = Integer.parseInt(request.getParameter("id"));
-		comment.setId(id);
-
-		new CommentService().delete(comment);
-
-		response.sendRedirect("./");
-		//System.out.println(user);
 	}
 }
 
