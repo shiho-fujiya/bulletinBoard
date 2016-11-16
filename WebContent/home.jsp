@@ -82,6 +82,7 @@
 
 			<form action="comment" method="post"><br />
 				<input type="hidden" name="postId" value="${post.id}">
+				<input type="hidden" name="commentId" value="${comment.id}">
 				<label for="text">本文</label>
 				<textarea name="text" cols="100" rows="5" class="tweet-box"></textarea>
 				(500文字以下で入力してください)<br />
