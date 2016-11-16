@@ -10,31 +10,6 @@ import bulletinBoard.dao.UserDao;
 
 public class ManagementService {
 
-//	public User operation (int id, boolean operation, User user) {
-//
-//		Connection connection = null;
-//		try {
-//			connection = getConnection();
-//
-//
-//			UserDao userDao = new UserDao();
-//			User userDate = userDao.updateBool(connection, id, operation, user);
-//			System.out.println(userDao);
-//
-//			commit(connection);
-//
-//			return userDate;
-//		} catch (RuntimeException e) {
-//			rollback(connection);
-//			throw e;
-//		} catch (Error e) {
-//			rollback(connection);
-//			throw e;
-//		} finally {
-//			close(connection);
-//		}
-//	}
-
 	public Boolean updateBool(Integer userId, boolean operation) {
 
 		Connection connection = null;

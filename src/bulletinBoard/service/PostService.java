@@ -35,6 +35,7 @@ public class PostService {
 			close(connection);
 		}
 	}
+
 	public List<UserPost> getPost(Integer userId) {
 
 		Connection connection = null;
@@ -47,6 +48,31 @@ public class PostService {
 			commit(connection);
 
 			return ret;
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+
+	public void delete(Post post) {
+
+		Connection connection = null;
+
+		//System.out.println(post);
+		try {
+			connection = getConnection();
+
+			PostDao postDao = new PostDao();
+			postDao.delete(connection, post);
+
+			commit(connection);
+
+			return;
 		} catch (RuntimeException e) {
 			rollback(connection);
 			throw e;

@@ -43,52 +43,12 @@ public class ManagementServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
-		//ManagementService managementService = new ManagementService();
-
 		boolean operation = new Boolean(request.getParameter("operation")).booleanValue();
-		System.out.println(operation);
+		//System.out.println(operation);
 		int id = Integer.parseInt(request.getParameter("id"));
-		System.out.println(id);
+		//System.out.println(id);
 
 		new ManagementService().updateBool(id, operation);
 		response.sendRedirect("management");
-
-
-//		HttpSession session = request.getSession();
-//
-//		List<String> messages = new ArrayList<String>();
-//
-//		if (isValid(request, messages) == true) {
-//
-//			User user = (User) session.getAttribute("user");
-//
-//			user.setId(user.getId());
-//			user.setOperation(operation);
-//
-//			//new ManagementService().register(user);
-//
-//			response.sendRedirect("./");
-//		}
-//
-//		if (operation == true) {
-//			session.setAttribute("id", id);
-//			session.setAttribute("operation", operation);
-//			response.sendRedirect("/management");
-//
-//		} else {
-//
-//			session.setAttribute("operation", operation);
-//			response.sendRedirect("/management");
-//		}
 	}
-
-	/*private boolean isValid(HttpServletRequest request, List<String> messages) {
-
-		String operation = request.getParameter("operation");
-		System.out.println(operation);
-		String id = request.getParameter("id");
-		System.out.println(id);
-
-		return true;
-	}*/
 }

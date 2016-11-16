@@ -64,7 +64,6 @@ public class NewPostServlet extends HttpServlet {
 		if (isValid(request, messages) == true) {
 
 			User user = (User) session.getAttribute("loginUser");
-
 			Post post = new Post();
 			post.setSubject(request.getParameter("subject"));
 			post.setCategory(request.getParameter("category"));

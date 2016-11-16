@@ -60,6 +60,10 @@
 			<div class="category"><c:out value="${post.category}" /></div>
 			<div class="text"><c:out value="${post.text}" /></div>
 			<div class="date"><fmt:formatDate value="${post.insertDate}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
+			<form action="home" method="post">
+				<input type="hidden" name="postId" value="${ post.id }">
+				<input type="submit" value="この投稿を削除" />
+			</form>
 
 			<c:forEach items="${comments}" var="comment">
 
@@ -67,6 +71,10 @@
 					<div class="name"><c:out value="${comment.name}" /></div>
 					<div class="text"><c:out value="${comment.text}" /></div>
 					<div class="date"><fmt:formatDate value="${comment.insertDate}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
+					<form action="home" method="post">
+						<input type="hidden" name="commentId" value="${ commentId }">
+						<input type="submit" value="このコメントを削除" />
+					</form>
 				</c:if>
 
 			</c:forEach>
