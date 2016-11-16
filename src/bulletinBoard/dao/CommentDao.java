@@ -4,12 +4,66 @@ import static bulletinBoard.utils.CloseableUtil.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import bulletinBoard.beans.Comment;
 import bulletinBoard.exception.SQLRuntimeException;
 
 public class CommentDao {
+
+	public Comment getComment(Connection connection, int id) {
+		PreparedStatement ps = null;
+		try {
+			String sql = "SELECT * FROM users WHERE (account = ?) AND password = ?";
+
+			ps = connection.prepareStatement(sql);
+			ps.setInt(1, id);
+
+
+			ResultSet rs = ps.executeQuery();
+			List<Comment> commentList = toCommentList(rs);
+			if (commentList.isEmpty() == true) {
+				return null;
+			} else if (2 <= commentList.size()) {
+				throw new IllegalStateException("2 <= userList.size()");
+			} else {
+				return commentList.get(0);
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+
+	private List<Comment> toCommentList(ResultSet rs) throws SQLException {
+
+		List<Comment> ret = new ArrayList<Comment>();
+		try {
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String text = rs.getString("text");
+				Timestamp insertDate = rs.getTimestamp("insert_date");
+				Timestamp updateDate = rs.getTimestamp("update_date");
+
+				Comment comment = new Comment();
+				comment.setId(id);
+				comment.setText(text);
+				comment.setInsertDate(insertDate);
+				comment.setUpdateDate(updateDate);
+
+				ret.add(comment);
+				//System.out.println(user);
+			}
+			return ret;
+		} finally {
+			close(rs);
+		}
+	}
 
 	public void insert(Connection connection, Comment comment) {
 

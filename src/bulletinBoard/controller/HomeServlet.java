@@ -60,8 +60,11 @@ public class HomeServlet extends HttpServlet {
 		new PostService().delete(post);
 
 		Comment comment = new Comment();
-		int commnetId = Integer.parseInt(request.getParameter("commentId"));
-		comment.setId(commnetId);
+		System.out.println(comment);
+		int id = Integer.parseInt(request.getParameter("id"));
+		comment.setId(id);
+
+		new CommentService().delete(comment);
 
 		response.sendRedirect("./");
 		//System.out.println(user);

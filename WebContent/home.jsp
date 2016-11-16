@@ -66,13 +66,12 @@
 			</form>
 
 			<c:forEach items="${comments}" var="comment">
-
 				<c:if test="${post.id == comment.postId}">
 					<div class="name"><c:out value="${comment.name}" /></div>
 					<div class="text"><c:out value="${comment.text}" /></div>
 					<div class="date"><fmt:formatDate value="${comment.insertDate}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
 					<form action="home" method="post">
-						<input type="hidden" name="commentId" value="${ commentId }">
+						<input type="hidden" name="commentId" value="${ comment.id }">
 						<input type="submit" value="このコメントを削除" />
 					</form>
 				</c:if>

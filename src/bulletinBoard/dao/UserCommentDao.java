@@ -41,6 +41,7 @@ public class UserCommentDao {
 		List<UserComment> ret = new ArrayList<UserComment>();
 		try {
 			while (rs.next()) {
+				int id = rs.getInt("id");
 				String name = rs.getString("name");
 				int userId = rs.getInt("user_id");
 				int postId = rs.getInt("post_id");
@@ -48,6 +49,7 @@ public class UserCommentDao {
 				Timestamp insertDate = rs.getTimestamp("insert_date");
 
 				UserComment comment = new UserComment();
+				comment.setId(id);
 				comment.setName(name);
 				comment.setUserId(userId);
 				comment.setPostId(postId);
