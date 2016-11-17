@@ -9,6 +9,8 @@ public class UserComment implements Serializable {
 	private int id;
 	private int userId;
 	private int postId;
+	private int branchId;
+	private int positionId;
 	private String name;
 	private String text;
 	private Date insertDate;
@@ -35,6 +37,22 @@ public class UserComment implements Serializable {
 
 	public void setPostId(int postId) {
 		this.postId = postId;
+	}
+
+	public int getBranchId() {
+		return branchId;
+	}
+
+	public void setBranchId(int branchId) {
+		this.branchId = branchId;
+	}
+
+	public int getPositionId() {
+		return positionId;
+	}
+
+	public void setPositionId(int positionId) {
+		this.positionId = positionId;
 	}
 
 	public String getName() {

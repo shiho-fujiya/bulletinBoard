@@ -31,10 +31,11 @@ public class NewPostServlet extends HttpServlet {
 		User user;
 		List<UserPost> posts;
 		boolean isShowPostForm;
+		Post post = new Post();
 
 		if (userId == null) {
 			user = (User) request.getSession().getAttribute("loginUser");
-			posts = new PostService().getPost(null);
+			posts = new PostService().getPost(null, post);
 			if (user != null) {
 				isShowPostForm = true;
 			} else {
@@ -43,7 +44,7 @@ public class NewPostServlet extends HttpServlet {
 		} else {
 			int uId = Integer.parseInt(userId);
 			user = new UserService().getUser(uId);
-			posts = new PostService().getPost(uId);
+			posts = new PostService().getPost(uId, post);
 			isShowPostForm = false;
 		}
 		request.setAttribute("user", user);

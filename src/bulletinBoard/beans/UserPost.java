@@ -9,6 +9,8 @@ public class UserPost implements Serializable {
 	private int id;
 	private int userId;
 	private String name;
+	private int branchId;
+	private int positionId;
 	private String subject;
 	private String category;
 	private String text;
@@ -38,6 +40,21 @@ public class UserPost implements Serializable {
 		this.name = name;
 	}
 
+	public int getBranchId() {
+		return branchId;
+	}
+
+	public void setBranchId(int branchId) {
+		this.branchId = branchId;
+	}
+
+	public int getPositionId() {
+		return positionId;
+	}
+
+	public void setPositionId(int positionId) {
+		this.positionId = positionId;
+	}
 
 	public String getSubject() {
 		return subject;
@@ -70,5 +87,4 @@ public class UserPost implements Serializable {
 	public void setInsertDate(Date insertDate) {
 		this.insertDate = insertDate;
 	}
-
 }

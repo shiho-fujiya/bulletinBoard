@@ -8,6 +8,33 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>管理画面</title>
+
+
+<script type="text/javascript">
+<!--
+
+function check(){
+
+	// 「OK」時の処理開始 ＋ 確認ダイアログの表示
+	if(window.confirm('本当にいいんですね？')){
+		location.href = "example_confirm.html"; // example_confirm.html へジャンプ
+		return true; // 「OK」時は送信を実行
+	}
+	// 「OK」時の処理終了
+
+	// 「キャンセル」時の処理開始
+	else{
+
+		window.alert('キャンセルされました'); // 警告ダイアログを表示
+		return false; // 送信を中止
+	}
+	// 「キャンセル」時の処理終了
+
+}
+
+// -->
+</script>
+
 <link href="./css/style.css" rel="stylesheet" type="text/css">
 	<style type="text/css">
 	<!--
@@ -16,10 +43,21 @@
 	}
 	-->
 	</style>
+
 </head>
 <body>
 
 <div class="main-contents">
+<c:if test="${ not empty errorMessages }">
+	<div class="errorMessages">
+		<ul>
+			<c:forEach items="${errorMessages}" var="message">
+				<li><c:out value="${message}" />
+			</c:forEach>
+		</ul>
+	</div>
+	<c:remove var="errorMessages" scope="session"/>
+</c:if>
 	<a href="signup">ユーザー新規登録</a>
 	<a href="home">ホーム</a>
 
@@ -45,7 +83,7 @@
 
 			<td>
 			<!--  -->
-			<form action="management" method="post">
+			<form action="management" method="post" onSubmit="return check()">
 				<input type="hidden" name="id" value="${user.id}">
 				<c:if test="${ user.id != loginUser.id }">
 				<c:if test="${ user.operation == true }">

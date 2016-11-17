@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bulletinBoard.beans.Post;
 import bulletinBoard.beans.User;
 import bulletinBoard.beans.UserComment;
 import bulletinBoard.beans.UserPost;
@@ -25,13 +26,14 @@ public class HomeServlet extends HttpServlet {
 		//String userId = request.getParameter("user_id");
 		//System.out.println("aaaaaaaa");
 
-		User user;
+		User user = (User) request.getSession().getAttribute("loginUser");
 		List<UserPost> posts;
-		//boolean isShowPostsForm;
 
+		String category = request.getParameter("category");
 
-		user = (User) request.getSession().getAttribute("loginUser");
-		posts = new PostService().getPost(null);
+		System.out.println(category);
+
+		posts = new PostService().getPost(category);
 		request.setAttribute("users", user);
 		//System.out.println(user);
 		request.setAttribute("posts", posts);
@@ -41,6 +43,12 @@ public class HomeServlet extends HttpServlet {
 
 		request.setAttribute("user", user);
 		request.setAttribute("comments", comments);
+
+		List<Post> categoris = new PostService().getCategoris();
+		//System.out.println(categoris.size());
+		request.setAttribute("categoris", categoris);
+		request.setAttribute("setCategory", category);
+		//System.out.println(categoris);
 
 		request.getRequestDispatcher("/home.jsp").forward(request, response);
 

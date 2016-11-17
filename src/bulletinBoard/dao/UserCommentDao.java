@@ -45,6 +45,8 @@ public class UserCommentDao {
 				String name = rs.getString("name");
 				int userId = rs.getInt("user_id");
 				int postId = rs.getInt("post_id");
+				int branchId = rs.getInt("branch_id");
+				int positionId = rs.getInt("position_id");
 				String text = rs.getString("text");
 				Timestamp insertDate = rs.getTimestamp("insert_date");
 
@@ -53,6 +55,8 @@ public class UserCommentDao {
 				comment.setName(name);
 				comment.setUserId(userId);
 				comment.setPostId(postId);
+				comment.setBranchId(branchId);
+				comment.setPositionId(positionId);
 				comment.setText(text);
 				comment.setInsertDate(insertDate);
 

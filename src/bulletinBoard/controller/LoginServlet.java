@@ -47,6 +47,7 @@ public class LoginServlet extends HttpServlet {
 
 			List<String> messages = new ArrayList<String>();
 			messages.add("ログインに失敗しました。");
+			messages.add("無効なセッションです");
 			session.setAttribute("errorMessages", messages);
 			session.setAttribute("account", account);
 			session.removeAttribute("loginUser");

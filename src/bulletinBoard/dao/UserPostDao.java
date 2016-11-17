@@ -15,17 +15,28 @@ import bulletinBoard.exception.SQLRuntimeException;
 
 public class UserPostDao {
 
-	public List<UserPost> getUserPost(Connection connection, Integer userId, int num) {
+	public List<UserPost> getUserPost(Connection connection, String category) {
 
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
 			sql.append("SELECT * FROM users_posts ");
-			sql.append("ORDER BY insert_date DESC limit " + num);
+			if (category != null ) {
+				sql.append(" where category = ? ");
+			}
+			sql.append("ORDER BY insert_date DESC ");
 
 			ps = connection.prepareStatement(sql.toString());
 
+			if (category != null ) {
+				ps.setString(1, category);
+			}
+
+
+			System.out.println(ps.toString());
+
 			ResultSet rs = ps.executeQuery();
+
 			List<UserPost> ret = toUserPostList(rs);
 			return ret;
 		} catch (SQLException e) {
@@ -44,6 +55,8 @@ public class UserPostDao {
 				int postId = rs.getInt("post_id");
 				String name = rs.getString("name");
 				int userId = rs.getInt("user_id");
+				int branchId = rs.getInt("branch_id");
+				int positionId = rs.getInt("position_id");
 				String subject = rs.getString("subject");
 				String category = rs.getString("category");
 				String text = rs.getString("text");
@@ -53,6 +66,8 @@ public class UserPostDao {
 				post.setId(postId);
 				post.setName(name);
 				post.setUserId(userId);
+				post.setBranchId(branchId);
+				post.setPositionId(positionId);
 				post.setSubject(subject);
 				post.setCategory(category);
 				post.setText(text);
@@ -65,5 +80,4 @@ public class UserPostDao {
 			close(rs);
 		}
 	}
-
 }

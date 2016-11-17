@@ -114,16 +114,60 @@ public class PostDao {
 			sql.append("DELETE FROM posts ");
 			sql.append(" WHERE");
 			sql.append(" id = ?");
-			System.out.println(sql);
+			//System.out.println(sql);
 			ps = connection.prepareStatement(sql.toString());
 
 			ps.setInt(1, post.getId());
-			System.out.println(ps);
+			//System.out.println(ps);
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			throw new SQLRuntimeException(e);
 		} finally {
 			close(ps);
+		}
+	}
+
+	public List<Post> getCategoris(Connection connection) {
+
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("SELECT category FROM posts GROUP BY category");
+			//System.out.println(sql);
+			ps = connection.prepareStatement(sql.toString());
+			//System.out.println(ps);
+
+			ResultSet rs = ps.executeQuery();
+			System.out.println(rs);
+
+			List<Post> ret = toCategorisList(rs);
+			//System.out.println(ret);
+
+			return ret;
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+
+	private List<Post> toCategorisList(ResultSet rs)
+			throws SQLException {
+
+		List<Post> ret = new ArrayList<Post>();
+		try {
+			while (rs.next()) {
+				String category = rs.getString("category");
+				//System.out.println(category);
+
+				Post categoris = new Post();
+				categoris.setCategory(category);
+
+				ret.add(categoris);
+			}
+			return ret;
+		} finally {
+			close(rs);
 		}
 	}
 }

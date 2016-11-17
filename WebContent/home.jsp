@@ -50,6 +50,24 @@
 	</div>
 </c:if>
 
+<label for="category">カテゴリー選択</label>
+		<div class="category">
+			<form action="home" method="get">
+				<select name="category">
+					<option value="">選択してください</option>
+						<c:forEach items="${ categoris }" var="category">
+							<c:if test="${ setCategory == category.category }" >
+								<option value="${ category.category }" selected >${ category.category }</option>
+							</c:if>
+							<c:if test="${ setCategory != category.category }" >
+								<option value="${ category.category }" >${ category.category }</option>
+							</c:if>
+						</c:forEach>
+				</select>
+				<input type="submit" value="選択" />
+			</form>
+		</div>
+
 <div class="posts">
 	<c:forEach items="${posts}" var="post">
 		<div class="post">
@@ -61,8 +79,20 @@
 			<div class="text"><c:out value="${post.text}" /></div>
 			<div class="date"><fmt:formatDate value="${post.insertDate}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
 			<form action="deletepost" method="post">
-				<input type="hidden" name="postId" value="${ post.id }">
-				<input type="submit" value="この投稿を削除" />
+				<c:choose>
+					<c:when test="${ user.positionId == 1 }">
+						<input type="hidden" name="postId" value="${ post.id }">
+						<input type="submit" value="この投稿を削除" />
+					</c:when>
+					<c:when test="${ loginUser.positionId == 3 && loginUser.branchId == post.branchId }">
+						<input type="hidden" name="postId" value="${ post.id }">
+						<input type="submit" value="この投稿を削除" />
+					</c:when>
+					<c:when test="${ user.id == loginUser.id && loginUser.id == post.userId }">
+						<input type="hidden" name="postId" value="${ post.id }">
+						<input type="submit" value="この投稿を削除" />
+					</c:when>
+				</c:choose>
 			</form>
 
 			<c:forEach items="${comments}" var="comment">
@@ -71,8 +101,20 @@
 					<div class="text"><c:out value="${comment.text}" /></div>
 					<div class="date"><fmt:formatDate value="${comment.insertDate}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
 					<form action="deletecomment" method="post">
-						<input type="hidden" name="commentId" value="${ comment.id }">
-						<input type="submit" value="このコメントを削除" />
+						<c:choose>
+							<c:when test="${ user.positionId == 1 }">
+								<input type="hidden" name="commentId" value="${ comment.id }">
+								<input type="submit" value="この投稿を削除" />
+							</c:when>
+							<c:when test="${ loginUser.positionId == 3 && loginUser.branchId == comment.branchId }">
+								<input type="hidden" name="commentId" value="${ comment.id }">
+								<input type="submit" value="この投稿を削除" />
+							</c:when>
+							<c:when test="${ user.id == loginUser.id && loginUser.id == comment.userId }">
+								<input type="hidden" name="commentId" value="${ comment.id }">
+								<input type="submit" value="この投稿を削除" />
+							</c:when>
+						</c:choose>
 					</form>
 				</c:if>
 

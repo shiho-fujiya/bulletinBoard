@@ -30,7 +30,18 @@ public class SettingsServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-		int userId = Integer.parseInt(request.getParameter("userId"));
+		String id = request.getParameter("userId");
+
+		if (!id.matches("^[0-9]$")) {
+			response.sendRedirect("management");
+			List<String> messages = new ArrayList<String>();
+			messages.add("無効なIDです");
+			session.setAttribute("errorMessages", messages);
+			return;
+		}
+		int userId = Integer.parseInt(id);
+
+
 
 		SettingService settingService = new SettingService();
 		User editUser = settingService.settings(userId);
@@ -91,7 +102,9 @@ public class SettingsServlet extends HttpServlet {
 		editUser.setBranchId(Integer.parseInt(request.getParameter("branchId")));
 		editUser.setPositionId(Integer.parseInt(request.getParameter("positionId")));
 		return editUser;
+
 	}
+
 
 	private boolean isValid(HttpServletRequest request, List<String> messages) {
 		String account = request.getParameter("account");
@@ -120,6 +133,7 @@ public class SettingsServlet extends HttpServlet {
 		} else {
 			Integer.parseInt(request.getParameter("positionId"));
 		}
+		//if (.matches("^[0-9]{8}$"))
 
 		if (messages.size() == 0) {
 			return true;

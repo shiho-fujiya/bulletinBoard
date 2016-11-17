@@ -13,8 +13,6 @@ import bulletinBoard.dao.UserPostDao;
 
 public class PostService {
 
-	private static final int LIMIT_NUM = 1000;
-
 	public void register(Post post) {
 
 		Connection connection = null;
@@ -36,14 +34,15 @@ public class PostService {
 		}
 	}
 
-	public List<UserPost> getPost(Integer userId) {
+	public List<UserPost> getPost(String category) {
 
 		Connection connection = null;
 		try {
 			connection = getConnection();
 
 			UserPostDao postDao = new UserPostDao();
-			List<UserPost> ret = postDao.getUserPost(connection, userId, LIMIT_NUM);
+			List<UserPost> ret = postDao.getUserPost(connection, category);
+
 
 			commit(connection);
 
@@ -73,6 +72,29 @@ public class PostService {
 			commit(connection);
 
 			return;
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+
+	public List<Post> getCategoris() {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			PostDao postDao = new PostDao();
+			List<Post> ret = postDao.getCategoris(connection);
+
+			commit(connection);
+			//System.out.println(ret);
+			return ret;
 		} catch (RuntimeException e) {
 			rollback(connection);
 			throw e;

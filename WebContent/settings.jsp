@@ -40,7 +40,12 @@
 			<select name="branchId">
 				<option value="">選択してください</option>
 					<c:forEach items="${branches}" var="branch">
-						<option value="${branch.id}">${branch.name}</option>
+						<c:if test="${ user.branchId == branch.id }" >
+							<option value="${ user.branchId }" selected >${ branch.name }</option>
+						</c:if>
+						<c:if test="${ user.branchId != branch.id }" >
+							<option value="${ branch.id }" >${ branch.name }</option>
+						</c:if>
 					</c:forEach>
 			</select>
 		</div>
@@ -50,6 +55,12 @@
 			<select name="positionId">
 				<option value="">選択してください</option>
 					<c:forEach items="${positions}" var="position">
+						<c:if test="${ user.positionId == position.id }" >
+							<option value="${ user.positionId }" selected >${ position.name }</option>
+						</c:if>
+						<c:if test="${ user.positionId != position.id }" >
+							<option value="${ position.id }" >${ position.name }</option>
+						</c:if>
 						<option value="${position.id}">${position.name}</option>
 					</c:forEach>
 			</select>
