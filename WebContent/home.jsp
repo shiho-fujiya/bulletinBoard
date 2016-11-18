@@ -8,6 +8,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>掲示板システム</title>
+
 	<link href="./css/style.css" rel="stylesheet" type="text/css">
 	<style type="text/css">
 	<!--
@@ -64,9 +65,18 @@
 							</c:if>
 						</c:forEach>
 				</select>
+	<br>
+			<input type="date" name="oldDay" value="${ date }">
+			<c:out value="${oldDays.insertDate}" />
+
+	<br>
+			<input type="date" name="newDay" value="${ date }">
+			<c:out value="${date}" />
+
 				<input type="submit" value="選択" />
 			</form>
 		</div>
+
 
 <div class="posts">
 	<c:forEach items="${posts}" var="post">

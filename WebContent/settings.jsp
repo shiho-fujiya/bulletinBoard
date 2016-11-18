@@ -68,7 +68,7 @@
 
 	<input type="submit" value="登録" /> <br />
 
-	<a href="./">戻る</a>
+	<a href="/management">戻る</a>
 </form>
 </div>
 </body>

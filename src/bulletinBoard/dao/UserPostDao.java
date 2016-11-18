@@ -10,30 +10,36 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
+
 import bulletinBoard.beans.UserPost;
 import bulletinBoard.exception.SQLRuntimeException;
 
 public class UserPostDao {
 
-	public List<UserPost> getUserPost(Connection connection, String category) {
+	public List<UserPost> getUserPost(Connection connection, String category, String oldDate, String newDate) {
 
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
 			sql.append("SELECT * FROM users_posts ");
-			if (category != null ) {
-				sql.append(" where category = ? ");
+			sql.append("WHERE BETWEEN ? AND ? ");
+			if (!StringUtils.isEmpty(category) == true) {
+				sql.append(" and category = ? ");
 			}
 			sql.append("ORDER BY insert_date DESC ");
 
 			ps = connection.prepareStatement(sql.toString());
 
-			if (category != null ) {
-				ps.setString(1, category);
+			ps.setString(1, oldDate);//値の引数
+			ps.setString(2, newDate);//値の引数
+			if (!StringUtils.isEmpty(category) == true) {
+				ps.setString(3, category);
 			}
+			System.out.println(ps);
 
 
-			System.out.println(ps.toString());
+			//System.out.println(ps.toString());
 
 			ResultSet rs = ps.executeQuery();
 
@@ -78,6 +84,51 @@ public class UserPostDao {
 			return ret;
 		} finally {
 			close(rs);
+		}
+	}
+
+	public UserPost getOldDate(Connection connection) {
+
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("SELECT * FROM users_posts ORDER BY insert_date LIMIT 1 ");
+
+			ps = connection.prepareStatement(sql.toString());
+
+			ResultSet rs = ps.executeQuery();
+
+			List<UserPost> ret = toUserPostList(rs);
+
+			return ret.get(0);
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+
+	public List<UserPost> getDays(Connection connection) {
+
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("SELECT * FROM posts WHERE BETWEEN ? AND ? ");
+			//System.out.println(sql);
+			ps = connection.prepareStatement(sql.toString());
+			//System.out.println(ps);
+
+			ResultSet rs = ps.executeQuery();
+			//System.out.println(rs);
+
+			List<UserPost> ret = toUserPostList(rs);
+			//System.out.println(ret);
+
+			return ret;
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
 		}
 	}
 }

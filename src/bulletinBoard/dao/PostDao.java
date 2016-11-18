@@ -6,7 +6,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,60 +13,6 @@ import bulletinBoard.beans.Post;
 import bulletinBoard.exception.SQLRuntimeException;
 
 public class PostDao {
-
-	public Post getPost(Connection connection, int id) {
-		PreparedStatement ps = null;
-		try {
-			String sql = "SELECT * FROM users WHERE (account = ?) AND password = ?";
-
-			ps = connection.prepareStatement(sql);
-			ps.setInt(1, id);
-
-
-			ResultSet rs = ps.executeQuery();
-			List<Post> postList = toPostList(rs);
-			if (postList.isEmpty() == true) {
-				return null;
-			} else if (2 <= postList.size()) {
-				throw new IllegalStateException("2 <= userList.size()");
-			} else {
-				return postList.get(0);
-			}
-		} catch (SQLException e) {
-			throw new SQLRuntimeException(e);
-		} finally {
-			close(ps);
-		}
-	}
-
-	private List<Post> toPostList(ResultSet rs) throws SQLException {
-
-		List<Post> ret = new ArrayList<Post>();
-		try {
-			while (rs.next()) {
-				int id = rs.getInt("id");
-				String subject = rs.getString("subject");
-				String category = rs.getString("category");
-				String text = rs.getString("text");
-				Timestamp insertDate = rs.getTimestamp("insert_date");
-				Timestamp updateDate = rs.getTimestamp("update_date");
-
-				Post post = new Post();
-				post.setId(id);
-				post.setSubject(subject);
-				post.setCategory(category);
-				post.setText(text);
-				post.setInsertDate(insertDate);
-				post.setUpdateDate(updateDate);
-
-				ret.add(post);
-				//System.out.println(user);
-			}
-			return ret;
-		} finally {
-			close(rs);
-		}
-	}
 
 	public void insert(Connection connection, Post post) {
 
@@ -138,7 +83,7 @@ public class PostDao {
 			//System.out.println(ps);
 
 			ResultSet rs = ps.executeQuery();
-			System.out.println(rs);
+			//System.out.println(rs);
 
 			List<Post> ret = toCategorisList(rs);
 			//System.out.println(ret);

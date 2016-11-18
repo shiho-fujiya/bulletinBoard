@@ -119,6 +119,8 @@ function check(){
 	<div class="category"><c:out value="${post.category}" /></div>
 	<div class="text"><c:out value="${post.text}" /></div>
 </div>
+
+<a href="./">戻る</a>
 </div>
 </body>
 </html>

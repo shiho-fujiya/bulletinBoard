@@ -15,7 +15,6 @@ import org.apache.commons.lang.StringUtils;
 
 import bulletinBoard.beans.Post;
 import bulletinBoard.beans.User;
-import bulletinBoard.beans.UserPost;
 import bulletinBoard.service.PostService;
 import bulletinBoard.service.UserService;
 
@@ -29,13 +28,13 @@ public class NewPostServlet extends HttpServlet {
 		String userId = request.getParameter("user_id");
 
 		User user;
-		List<UserPost> posts;
+		//List<UserPost> posts;
 		boolean isShowPostForm;
-		Post post = new Post();
+		//Post post = new Post();
 
 		if (userId == null) {
 			user = (User) request.getSession().getAttribute("loginUser");
-			posts = new PostService().getPost(null, post);
+			//posts = new PostService().getPost(null, post);
 			if (user != null) {
 				isShowPostForm = true;
 			} else {
@@ -44,11 +43,11 @@ public class NewPostServlet extends HttpServlet {
 		} else {
 			int uId = Integer.parseInt(userId);
 			user = new UserService().getUser(uId);
-			posts = new PostService().getPost(uId, post);
+			//posts = new PostService().getPost(uId, post);
 			isShowPostForm = false;
 		}
 		request.setAttribute("user", user);
-		request.setAttribute("posts", posts);
+		//request.setAttribute("posts", posts);
 		request.setAttribute("isShowPostForm", isShowPostForm);
 
 		request.getRequestDispatcher("/post.jsp").forward(request, response);

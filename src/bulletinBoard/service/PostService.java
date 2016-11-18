@@ -34,14 +34,14 @@ public class PostService {
 		}
 	}
 
-	public List<UserPost> getPost(String category) {
+	public List<UserPost> getPost(String category, String oldDate, String newDate) {
 
 		Connection connection = null;
 		try {
 			connection = getConnection();
 
 			UserPostDao postDao = new UserPostDao();
-			List<UserPost> ret = postDao.getUserPost(connection, category);
+			List<UserPost> ret = postDao.getUserPost(connection, category, oldDate, newDate);
 
 
 			commit(connection);
@@ -91,6 +91,52 @@ public class PostService {
 
 			PostDao postDao = new PostDao();
 			List<Post> ret = postDao.getCategoris(connection);
+
+			commit(connection);
+			//System.out.println(ret);
+			return ret;
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+
+	public UserPost getOldDays() {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			UserPostDao userPostDao = new UserPostDao();
+			UserPost ret = userPostDao.getOldDate(connection);
+
+			commit(connection);
+			//System.out.println(ret);
+			return ret;
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+
+	public List<UserPost> getDays() {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			UserPostDao userPostDao = new UserPostDao();
+			List<UserPost> ret = userPostDao.getDays(connection);
 
 			commit(connection);
 			//System.out.println(ret);
