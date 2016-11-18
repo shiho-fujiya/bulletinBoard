@@ -35,15 +35,14 @@ public class CommentService {
 			close(connection);
 		}
 	}
-	public List<UserComment> getPost(Integer userId) {
+	public List<UserComment> getUserComments() {
 
 		Connection connection = null;
 		try {
 			connection = getConnection();
 
 			UserCommentDao commentDao = new UserCommentDao();
-			List<UserComment> ret = commentDao.getUserComment(connection, userId, LIMIT_NUM);
-
+			List<UserComment> ret = commentDao.getUserComments(connection, LIMIT_NUM);
 
 			return ret;
 		} catch (RuntimeException e) {

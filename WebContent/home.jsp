@@ -42,9 +42,9 @@
 <c:if test="${ not empty user }">
 	<div class="profile">
 		<a href="./?user_id=${user.id}"></a>
-			<div class="name"><h2><c:out value="${users.name }" /></h2></div>
+			<div class="name"><h2><c:out value="${user.name }" /></h2></div>
 			<div class="account">
-				<a href="./?user_id=${users.id }">@<c:out value="${ users.account }" /></a>
+				<a href="./?user_id=${user.id }">@<c:out value="${ user.account }" /></a>
 			</div>
 			<div class="account">
 		</div>
@@ -66,13 +66,9 @@
 						</c:forEach>
 				</select>
 	<br>
-			<input type="date" name="oldDay" value="${ date }">
-			<c:out value="${oldDays.insertDate}" />
-
+			<input type="date" name="oldDate" value="${ oldDate }">
 	<br>
-			<input type="date" name="newDay" value="${ date }">
-			<c:out value="${date}" />
-
+			<input type="date" name="newDate" value="${ newDate }">
 				<input type="submit" value="選択" />
 			</form>
 		</div>

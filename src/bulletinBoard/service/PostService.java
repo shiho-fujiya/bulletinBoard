@@ -106,7 +106,7 @@ public class PostService {
 		}
 	}
 
-	public UserPost getOldDays() {
+	public UserPost getOldDate() {
 
 		Connection connection = null;
 		try {
@@ -129,14 +129,14 @@ public class PostService {
 		}
 	}
 
-	public List<UserPost> getDays() {
+	public UserPost getNewDate() {
 
 		Connection connection = null;
 		try {
 			connection = getConnection();
 
 			UserPostDao userPostDao = new UserPostDao();
-			List<UserPost> ret = userPostDao.getDays(connection);
+			UserPost ret = userPostDao.getNewDate(connection);
 
 			commit(connection);
 			//System.out.println(ret);

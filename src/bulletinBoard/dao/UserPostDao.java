@@ -23,7 +23,7 @@ public class UserPostDao {
 		try {
 			StringBuilder sql = new StringBuilder();
 			sql.append("SELECT * FROM users_posts ");
-			sql.append("WHERE BETWEEN ? AND ? ");
+			sql.append("WHERE insert_date BETWEEN ? AND ? ");
 			if (!StringUtils.isEmpty(category) == true) {
 				sql.append(" and category = ? ");
 			}
@@ -31,8 +31,8 @@ public class UserPostDao {
 
 			ps = connection.prepareStatement(sql.toString());
 
-			ps.setString(1, oldDate);//値の引数
-			ps.setString(2, newDate);//値の引数
+			ps.setString(1, oldDate + " 00:00:00");//値の引数
+			ps.setString(2, newDate + " 23:59:59");//値の引数
 			if (!StringUtils.isEmpty(category) == true) {
 				ps.setString(3, category);
 			}
@@ -108,23 +108,20 @@ public class UserPostDao {
 		}
 	}
 
-	public List<UserPost> getDays(Connection connection) {
+	public UserPost getNewDate(Connection connection) {
 
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
-			sql.append("SELECT * FROM posts WHERE BETWEEN ? AND ? ");
-			//System.out.println(sql);
+			sql.append("SELECT * FROM users_posts ORDER BY insert_date DESC LIMIT 1 ");
+
 			ps = connection.prepareStatement(sql.toString());
-			//System.out.println(ps);
 
 			ResultSet rs = ps.executeQuery();
-			//System.out.println(rs);
 
 			List<UserPost> ret = toUserPostList(rs);
-			//System.out.println(ret);
 
-			return ret;
+			return ret.get(0);
 		} catch (SQLException e) {
 			throw new SQLRuntimeException(e);
 		} finally {

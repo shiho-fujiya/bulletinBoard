@@ -2,7 +2,6 @@ package bulletinBoard.controller;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -29,61 +28,40 @@ public class HomeServlet extends HttpServlet {
 
 
 		User user = (User) request.getSession().getAttribute("loginUser");
+		// JSPから値を取得
 		String category = request.getParameter("category");
-		String oldDay = request.getParameter("oldDay");
-		//System.out.println(oldDay);
-		String oldDate = request.getParameter("oldDay");
-		String newDate = request.getParameter("newDay");
+		String oldDate = request.getParameter("oldDate");
+		String newDate = request.getParameter("newDate");
 
-		List<UserComment> comments = new CommentService().getPost(null);
+		// 最小の日付が入力されているか判定
+		if(StringUtils.isEmpty(oldDate)) {
+			// ユーザーが日付を入力してないのでDBから日付を取得
+			UserPost post = new PostService().getOldDate();
+			oldDate = new SimpleDateFormat("yyyy/MM/dd").format(post.getInsertDate());
+		}
+		// 最大の日付が入力されているか判定
+		if(StringUtils.isEmpty(newDate)) {
+			// ユーザーが日付を入力してないのでDBから日付を取得
+			UserPost post = new PostService().getNewDate();
+			newDate = new SimpleDateFormat("yyyy/MM/dd").format(post.getInsertDate());
+		}
+
+		// 投稿を絞り込む
 		List<UserPost> posts = new PostService().getPost(category, oldDate, newDate);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		request.setAttribute("users", user);
-		request.setAttribute("posts", posts);
-
-		request.setAttribute("user", user);
-		request.setAttribute("comments", comments);
-
+		// カテゴリー一覧を取得
 		List<Post> categoris = new PostService().getCategoris();
+		// コメント一覧を取得
+		List<UserComment> comments = new CommentService().getUserComments();
+		// JSPに表示するように値をセット
 		request.setAttribute("categoris", categoris);
 		request.setAttribute("setCategory", category);
-
-		UserPost oldDays = new PostService().getOldDays();
-		request.setAttribute("oldDays", oldDays);
-		request.setAttribute("setOldDay", oldDay);
-
-		if (oldDay == null || oldDay == "") {
-			oldDay = request.getParameter("oldDay");
-			new PostService().getCategoris();
-		}
-
-		Date date = new Date();
-		request.setAttribute("date", date);
-		//System.out.println(date.toString());
-
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		String formatDate = sdf.format(date);
-		System.out.println(formatDate);
-
-		if (StringUtils.isEmpty(formatDate)) {
-			formatDate = request.getParameter("today");
-		}
+		request.setAttribute("oldDate", oldDate);
+		request.setAttribute("newDate", newDate);
+		request.setAttribute("posts", posts);
+		request.setAttribute("user", user);
+		request.setAttribute("comments", comments);
 
 		request.getRequestDispatcher("/home.jsp").forward(request, response);
 
 	}
 }
-

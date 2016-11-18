@@ -15,7 +15,7 @@ import bulletinBoard.exception.SQLRuntimeException;
 
 public class UserCommentDao {
 
-	public List<UserComment> getUserComment(Connection connection, Integer userId, int num) {
+	public List<UserComment> getUserComments(Connection connection, int num) {
 
 		PreparedStatement ps = null;
 		try {
