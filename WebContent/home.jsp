@@ -86,7 +86,7 @@
 			<div class="date"><fmt:formatDate value="${post.insertDate}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
 			<form action="deletepost" method="post">
 				<c:choose>
-					<c:when test="${ user.positionId == 1 }">
+					<c:when test="${ user.positionId == 2 }">
 						<input type="hidden" name="postId" value="${ post.id }">
 						<input type="submit" value="この投稿を削除" />
 					</c:when>
@@ -108,7 +108,7 @@
 					<div class="date"><fmt:formatDate value="${comment.insertDate}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
 					<form action="deletecomment" method="post">
 						<c:choose>
-							<c:when test="${ user.positionId == 1 }">
+							<c:when test="${ user.positionId == 2 }">
 								<input type="hidden" name="commentId" value="${ comment.id }">
 								<input type="submit" value="この投稿を削除" />
 							</c:when>
