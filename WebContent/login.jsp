@@ -10,6 +10,8 @@
 	<link href="css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+<h1>ログイン</h1>
+
 <div class="main-contents">
 
 <c:if test="${ not empty errorMessages }">

@@ -46,7 +46,7 @@ function check(){
 
 </head>
 <body>
-
+<h1>管理画面</h1>
 <div class="main-contents">
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">

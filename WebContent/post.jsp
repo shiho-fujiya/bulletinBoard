@@ -10,6 +10,8 @@
 	<link href="./css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+
+<h1>新規投稿</h1>
 <div class="main-contents">
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">
@@ -23,16 +25,17 @@
 </c:if>
 <form action="post" method="post"><br />
 	<label for="subject">件名</label>
-	<input name="subject" id="subject"/>（50文字以下で入力してください）<br />
+	<input name="subject" id="subject" value="${ post.subject }"/>（50文字以下で入力してください）<br />
 
 
+	<%-- テキストエリアにはvalueは使えないので、textareaで囲む --%>
 	<label for="text">本文</label>
-	<textarea name="text" cols="100" rows="5" class="tweet-box"></textarea>
+	<textarea name="text" cols="100" rows="5" class="tweet-box">${ post.text }</textarea>
 	(1000文字以下で入力してください)<br />
 
 
 	<label for="category">カテゴリー</label>
-	<input name="category" id="category"/>（10文字以下で入力してください）<br />
+	<input name="category" id="category" value="${ post.category }"/>（10文字以下で入力してください）<br />
 
 	<input type="submit" value="投稿" /> <br />
 

@@ -90,6 +90,12 @@ public class SettingsServlet extends HttpServlet {
 		} else {
 			session.setAttribute("errorMessages", messages);
 			request.setAttribute("user", user);
+
+			List<Branches> branches = new BranchesService().getBranches();
+			List<Positions> positions = new PositionsService().getPositions();
+
+			request.setAttribute("branches", branches);
+			request.setAttribute("positions", positions);
 			//response.sendRedirect("settings?userId=" + editUser.getId());
 			request.getRequestDispatcher("settings.jsp").forward(request, response);
 		}

@@ -58,7 +58,6 @@ public class SignUpServlet extends HttpServlet {
 			session.setAttribute("errorMessages", messages);
 			request.setAttribute("user", user);
 
-			//
 			List<Branches> branches = new BranchesService().getBranches();
 			List<Positions> positions = new PositionsService().getPositions();
 
@@ -99,7 +98,7 @@ public class SignUpServlet extends HttpServlet {
 		if (StringUtils.isEmpty(password) == true) {
 			messages.add("パスワードを入力してください");
 		} else if (!((password.length()) >= 6) || !(password.length() <= 225)) {
-			messages.add("アカウント名は6文字以上20文字以下で入力してください");
+			messages.add("パスワードは6文字以上225文字以下で入力してください");
 		} else if (!(password.equals(confirmation))) {
 			messages.add("パスワードが一致していません");
 		} else if (!password.matches("[a-zA-Z0-9 -/:-@\\[-`{-~]+$")) {

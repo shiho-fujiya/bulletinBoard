@@ -3,6 +3,7 @@
 <%@page isELIgnored="false" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -19,7 +20,7 @@
 	</style>
 </head>
 <body>
-
+<h1>ホーム画面</h1>
 <div class="main-contents">
 		<a href="post">新規投稿</a>
 		<a href="management">ユーザー管理</a>
@@ -77,13 +78,17 @@
 
 <div class="posts">
 	<c:forEach items="${posts}" var="post">
-		<div class="post">
+		<div class="post"></div>
 			<div class="account-name">
 				<span class="name"><c:out value="${post.name}" /></span>
 			</div>
 			<div class="subject"><c:out value="${post.subject}" /></div>
 			<div class="category"><c:out value="${post.category}" /></div>
-			<div class="text"><c:out value="${post.text}" /></div>
+			<div class="text">
+			<c:forEach var="s" items="${fn:split(post.text, '
+			')}">
+				<div><c:out value="${s}"></c:out></div>
+			</c:forEach>
 			<div class="date"><fmt:formatDate value="${post.insertDate}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
 			<form action="deletepost" method="post">
 				<c:choose>
@@ -105,7 +110,11 @@
 			<c:forEach items="${comments}" var="comment">
 				<c:if test="${post.id == comment.postId}">
 					<div class="name"><c:out value="${comment.name}" /></div>
-					<div class="text"><c:out value="${comment.text}" /></div>
+					<div class="text">
+					<c:forEach var="s" items="${fn:split(comment.text, '
+						')}">
+						<div><c:out value="${s}"></c:out></div>
+					</c:forEach></div>
 					<div class="date"><fmt:formatDate value="${comment.insertDate}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
 					<form action="deletecomment" method="post">
 						<c:choose>
@@ -124,15 +133,14 @@
 						</c:choose>
 					</form>
 				</c:if>
-
 			</c:forEach>
-		<div class="comment"></div>
 
+		<div class="comment"></div>
 			<form action="comment" method="post"><br />
 				<input type="hidden" name="postId" value="${post.id}">
 				<input type="hidden" name="commentId" value="${comment.id}">
 				<label for="text">本文</label>
-				<textarea name="text" cols="100" rows="5" class="tweet-box"></textarea>
+				<textarea name="text" cols="100" rows="5" class="tweet-box">${ comment.text }</textarea>
 				(500文字以下で入力してください)<br />
 				<input type="submit" value="コメント" /> <br />
 			</form>
