@@ -26,6 +26,7 @@ public class LoginServlet extends HttpServlet {
 
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -46,11 +47,17 @@ public class LoginServlet extends HttpServlet {
 		} else {
 
 			List<String> messages = new ArrayList<String>();
-			messages.add("ログインに失敗しました。");
-			messages.add("無効なセッションです");
-			session.setAttribute("errorMessages", messages);
-			session.setAttribute("account", account);
-			session.removeAttribute("loginUser");
+			if (user == null) {
+				messages.add("ログインに失敗しました。");
+				session.setAttribute("errorMessages", messages);
+				session.setAttribute("account", account);
+				session.removeAttribute("loginUser");
+			} else {
+				messages.add("無効なセッションです");
+				session.setAttribute("errorMessages", messages);
+				session.setAttribute("account", account);
+				session.removeAttribute("loginUser");
+			}
 
 			response.sendRedirect("login");
 		}

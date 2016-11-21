@@ -25,14 +25,13 @@
 
 <form action="login" method="post"><br />
 	<label for="account">アカウント名</label>
-	<input name="account" value="${account}" id="account" /> <br />
+	<input name="account" id="account" /> <br />
 
 
 	<label for="password">パスワード</label>
 	<input name="password" type="password" id="password"/> <br />
 	<c:remove var="account" scope="session"/>
 	<input type="submit" value="ログイン" /> <br />
-	<a href="./">戻る</a>
 </form>
 </div>
 </body>

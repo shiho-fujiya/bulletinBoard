@@ -120,7 +120,6 @@ function check(){
 	<div class="text"><c:out value="${post.text}" /></div>
 </div>
 
-<a href="./">戻る</a>
 </div>
 </body>
 </html>

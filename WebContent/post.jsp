@@ -36,8 +36,9 @@
 
 	<input type="submit" value="投稿" /> <br />
 
-
 </form>
+
+<a href="./">戻る</a>
 </div>
 </body>
 </html>

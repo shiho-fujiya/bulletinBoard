@@ -39,10 +39,8 @@ public class SettingsServlet extends HttpServlet {
 			session.setAttribute("errorMessages", messages);
 			return;
 		}
+
 		int userId = Integer.parseInt(id);
-
-
-
 		SettingService settingService = new SettingService();
 		User editUser = settingService.settings(userId);
 		//System.out.println(userId);

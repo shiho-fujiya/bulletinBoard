@@ -75,7 +75,7 @@ public class NewPostServlet extends HttpServlet {
 			response.sendRedirect("./");
 		} else {
 			session.setAttribute("errorMessages", messages);
-			response.sendRedirect("./");
+			response.sendRedirect("post");
 		}
 	}
 
@@ -89,22 +89,22 @@ public class NewPostServlet extends HttpServlet {
 		//System.out.println(text);
 
 		if (StringUtils.isEmpty(subject) == true) {
-			messages.add("入力してください");
+			messages.add("件名を入力してください");
 		}
 		if (50< subject.length()) {
 			messages.add("50文字以下で入力してください");
 		}
-		if (StringUtils.isEmpty(category) == true) {
-			messages.add("入力してください");
-		}
-		if (10 < category.length()) {
-			messages.add("10文字以下で入力してください");
-		}
 		if (StringUtils.isEmpty(text) == true) {
-			messages.add("入力してください");
+			messages.add("本文を入力してください");
 		}
 		if (1000 < text.length()) {
 			messages.add("1000文字以下で入力してください");
+		}
+		if (StringUtils.isEmpty(category) == true) {
+			messages.add("カテゴリーを入力してください");
+		}
+		if (10 < category.length()) {
+			messages.add("10文字以下で入力してください");
 		}
 		if (messages.size() == 0) {
 			return true;

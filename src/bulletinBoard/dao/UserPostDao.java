@@ -36,7 +36,7 @@ public class UserPostDao {
 			if (!StringUtils.isEmpty(category) == true) {
 				ps.setString(3, category);
 			}
-			System.out.println(ps);
+			//System.out.println(ps);
 
 
 			//System.out.println(ps.toString());
