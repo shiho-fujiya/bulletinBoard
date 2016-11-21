@@ -32,7 +32,7 @@ public class SettingsServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		String id = request.getParameter("userId");
 
-		if (!id.matches("^[0-9]$")) {
+		if (!id.matches("[0-9]+$")) {
 			response.sendRedirect("management");
 			List<String> messages = new ArrayList<String>();
 			messages.add("無効なIDです");
@@ -43,12 +43,20 @@ public class SettingsServlet extends HttpServlet {
 		int userId = Integer.parseInt(id);
 		SettingService settingService = new SettingService();
 		User editUser = settingService.settings(userId);
+		session.setAttribute("editUser", editUser);
+
+		if (editUser == null) {
+			response.sendRedirect("management");
+			List<String> messages = new ArrayList<String>();
+			messages.add("無効なIDです");
+			session.setAttribute("errorMessages", messages);
+			return;
+		}
 		//System.out.println(userId);
 		//System.out.println(editUser.getName());
 		List<Branches> branches = new BranchesService().getBranches();
 		List<Positions> positions = new PositionsService().getPositions();
 
-		session.setAttribute("editUser", editUser);
 		request.setAttribute("userId", userId);
 		request.setAttribute("user", editUser);
 		request.setAttribute("branches", branches);
@@ -63,26 +71,27 @@ public class SettingsServlet extends HttpServlet {
 
 		List<String> messages = new ArrayList<String>();
 		HttpSession session = request.getSession();
-		User editUser = getEditUser(request);
-		session.setAttribute("editUser", editUser);
 
+		User user = new User();
+		user.setAccount(request.getParameter("account"));
+
+		User editUser = getEditUser(request);
+
+		editUser.setName(request.getParameter("name"));
 		editUser.setAccount(request.getParameter("account"));
 		editUser.setPassword(request.getParameter("password"));
-		editUser.setName(request.getParameter("name"));
 		editUser.setBranchId(Integer.parseInt(request.getParameter("branchId")));
 		editUser.setPositionId(Integer.parseInt(request.getParameter("positionId")));
 
-		//System.out.println(user);
-		session.setAttribute("user", editUser);
-
 		if (isValid(request, messages) == true) {
-
 			new UserService().update(editUser);
 
 			response.sendRedirect("management");
 		} else {
 			session.setAttribute("errorMessages", messages);
-			response.sendRedirect("settings?userId=" + editUser.getId());
+			request.setAttribute("user", user);
+			//response.sendRedirect("settings?userId=" + editUser.getId());
+			request.getRequestDispatcher("settings.jsp").forward(request, response);
 		}
 	}
 
@@ -103,8 +112,8 @@ public class SettingsServlet extends HttpServlet {
 
 	}
 
-
 	private boolean isValid(HttpServletRequest request, List<String> messages) {
+		String userId = request.getParameter("userId");
 		String account = request.getParameter("account");
 		String password = request.getParameter("password");
 		String confirmation = request.getParameter("confirmation");
@@ -112,26 +121,41 @@ public class SettingsServlet extends HttpServlet {
 		String branchId = request.getParameter("branchId");
 		String positionId =request.getParameter("positionId");
 
-		if (StringUtils.isEmpty(account) == true) {
-			messages.add("アカウント名を入力してください");
-		}
-		if (password != confirmation) {
-			messages.add("パスワードが一致していません");
-		}
+		User user = new UserService().overlap(account);
+
 		if (StringUtils.isEmpty(name) == true) {
 			messages.add("名前を入力してください");
+		}else if (name.length() >= 10) {
+			messages.add("名前は10文字以内で設定してください");
 		}
+
+		if (StringUtils.isEmpty(account) == true) {
+			messages.add("アカウント名を入力してください");
+		} else if (!account.matches("[0-9a-zA-Z]+")) {
+			messages.add("アカウントは半角英数字で入力してください");
+		} else if (!((account.length()) >= 6) || !(account.length() <= 20)) {
+			messages.add("アカウント名は6文字以上20文字以下で入力してください");
+		} else if (user != null) {
+			if (user.getId() != Integer.parseInt(userId)) {
+				messages.add("このアカウント名は既に使用されています");
+			}
+		}
+
+		if (!(password.equals(confirmation))) {
+			messages.add("パスワードが一致していません");
+		}
+
 		if (StringUtils.isEmpty(branchId) == true) {
 			messages.add("勤務先を選択してください");
 		} else {
 			Integer.parseInt(request.getParameter("branchId"));
 		}
+
 		if (StringUtils.isEmpty(positionId) == true) {
 			messages.add("部署・役職を選択してください");
 		} else {
 			Integer.parseInt(request.getParameter("positionId"));
 		}
-		//if (.matches("^[0-9]{8}$"))
 
 		if (messages.size() == 0) {
 			return true;

@@ -23,10 +23,10 @@
 </c:if>
 <form action="signup" method="post"><br />
 	<label for="name">名前</label>
-	<input name="name" id="name"/><br />
+	<input name="name" id="name" value="${user.name}"/>（10文字以下）<br />
 
 	<label for="account">アカウント名</label>
-	<input name="account" id="account"/>（半角英数字で6文字以上20文字以下）<br />
+	<input name="account" id="account" value="${user.account}"/>（半角英数字で6文字以上20文字以下）<br />
 
 	<label for="password">パスワード</label>
 	<input name="password" type="password" id="password"/>（記号を含む全ての半角文字で6文字以上255文字以下）<br />
@@ -37,20 +37,27 @@
 	<label for="branch_id">所属</label>
 		<div class="branches">
 			<select name="branchId">
-				<option value="">選択してください</option>
-					<c:forEach items="${branches}" var="branch">
-						<option value="${branch.id}">${branch.name}</option>
-					</c:forEach>
+
+				<c:forEach items="${branches}" var="branch">
+					<option value="${ branch.id}" >${ branch.name }</option>
+						<c:if test="${ branch.id == user.branchId }" >
+							<option value="${ branch.id}" selected >${ branch.name }</option>
+							<c:out value="${user.branchId}" />
+						</c:if>
+				</c:forEach>
 			</select>
 		</div>
 
 	<label for="position_id">部署・役職</label>
 		<div class="positions">
 			<select name="positionId">
-				<option value="">選択してください</option>
-					<c:forEach items="${positions}" var="position">
-						<option value="${position.id}">${position.name}</option>
-					</c:forEach>
+
+				<c:forEach items="${positions}" var="position">
+					<option value="${ position.id}" selected >${ position.name }</option>
+						<c:if test="${ position.id == user.positionId }" >
+							<option value="${ position.id}" selected >${ position.name }</option>
+						</c:if>
+				</c:forEach>
 			</select>
 		</div>
 

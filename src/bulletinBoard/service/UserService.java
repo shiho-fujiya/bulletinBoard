@@ -110,4 +110,28 @@ public class UserService {
 			close(connection);
 		}
 	}
+
+	public User overlap(String account) {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			UserDao userDao = new UserDao();
+			User user = userDao.overlap(connection, account);
+			//System.out.println(user + "p");
+
+			commit(connection);
+
+			return user;
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
 }

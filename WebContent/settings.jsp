@@ -23,11 +23,13 @@
 </c:if>
 
 <form action="settings" method="post"><br />
+	<input type="hidden" name="userId" value="${user.id}">
+
 	<label for="name">名前</label>
-	<input name="name" value="${user.name}" id="name"/><br />
+	<input name="name" value="${editUser.name}" id="name"/>（10文字以下）<br />
 
 	<label for="account">アカウント名</label>
-	<input name="account" value="${user.account}" id="account" />（半角英数字で6文字以上20文字以下）<br />
+	<input name="account" value="${editUser.account}" id="account" />（半角英数字で6文字以上20文字以下）<br />
 
 	<label for="password">パスワード</label>
 	<input name="password" type="password" id="password"/>（記号を含む全ての半角文字で6文字以上255文字以下)<br />
@@ -44,7 +46,7 @@
 							<option value="${ user.branchId }" selected >${ branch.name }</option>
 						</c:if>
 						<c:if test="${ user.branchId != branch.id }" >
-							<option value="${ branch.id }" >${ branch.name }</option>
+							<option value="${ editUser.branchId }" >${ branch.name }</option>
 						</c:if>
 					</c:forEach>
 			</select>
@@ -59,9 +61,8 @@
 							<option value="${ user.positionId }" selected >${ position.name }</option>
 						</c:if>
 						<c:if test="${ user.positionId != position.id }" >
-							<option value="${ position.id }" >${ position.name }</option>
+							<option value="${ editUser.positionId }" >${ position.name }</option>
 						</c:if>
-						<option value="${position.id}">${position.name}</option>
 					</c:forEach>
 			</select>
 		</div>

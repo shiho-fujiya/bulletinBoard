@@ -154,7 +154,7 @@ public class UserDao {
 				ps.setInt(5, user.getId());
 				ps.setTimestamp(6,new Timestamp(user.getUpdateDate().getTime()));
 			}
-			System.out.println(ps);
+			//System.out.println(ps);
 			int count = ps.executeUpdate();
 			if (count == 0) {
 				throw new NoRowsUpdatedRuntimeException();
@@ -176,6 +176,7 @@ public class UserDao {
 			ps = connection.prepareStatement(sql);
 			ps.setInt(1, userId);
 
+			//System.out.println(ps.toString());
 
 			ResultSet rs = ps.executeQuery();
 			List<User> userList = toUserList(rs);
@@ -243,5 +244,30 @@ public class UserDao {
 			close(ps);
 		}
 		return true;
+	}
+
+	public User overlap(Connection connection, String account) {
+
+		PreparedStatement ps = null;
+		try {
+			String sql = "SELECT * FROM users WHERE account = ?";
+
+			ps = connection.prepareStatement(sql);
+			ps.setString(1, account);
+
+			ResultSet rs = ps.executeQuery();
+			List<User> userList = toUserList(rs);
+			if (userList.isEmpty() == true) {
+				return null;
+			} else if (2 <= userList.size()) {
+				throw new IllegalStateException("2 <= userList.size()");
+			} else {
+				return userList.get(0);
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
 	}
 }
