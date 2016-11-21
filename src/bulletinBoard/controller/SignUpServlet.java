@@ -64,6 +64,7 @@ public class SignUpServlet extends HttpServlet {
 	private boolean isValid(HttpServletRequest request, List<String> messages) {
 		String account = request.getParameter("account");
 		String password = request.getParameter("password");
+		String confirmation = request.getParameter("confirmation");
 		String name =request.getParameter("name");
 		String branchId = request.getParameter("branchId");
 		String positionId =request.getParameter("positionId");
@@ -73,6 +74,9 @@ public class SignUpServlet extends HttpServlet {
 		}
 		if (StringUtils.isEmpty(password) == true) {
 			messages.add("パスワードを入力してください");
+		}
+		if (!(password.equals(confirmation))) {
+			messages.add("パスワードが一致していません");
 		}
 		if (StringUtils.isEmpty(name) == true) {
 			messages.add("名前を入力してください");

@@ -22,14 +22,17 @@
 	<c:remove var="errorMessages" scope="session"/>
 </c:if>
 <form action="signup" method="post"><br />
+	<label for="name">名前</label>
+	<input name="name" id="name"/><br />
+
 	<label for="account">アカウント名</label>
 	<input name="account" id="account"/>（半角英数字で6文字以上20文字以下）<br />
 
 	<label for="password">パスワード</label>
 	<input name="password" type="password" id="password"/>（記号を含む全ての半角文字で6文字以上255文字以下）<br />
 
-	<label for="name">名前</label>
-	<input name="name" id="name"/><br />
+	<label for="confirmation">確認用パスワード</label>
+	<input name="confirmation" type="password" id="confirmation"/> <br />
 
 	<label for="branch_id">所属</label>
 		<div class="branches">

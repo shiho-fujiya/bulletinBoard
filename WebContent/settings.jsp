@@ -27,10 +27,10 @@
 	<input name="name" value="${user.name}" id="name"/><br />
 
 	<label for="account">アカウント名</label>
-	<input name="account" value="${user.account}" id="account" /><br />
+	<input name="account" value="${user.account}" id="account" />（半角英数字で6文字以上20文字以下）<br />
 
 	<label for="password">パスワード</label>
-	<input name="password" type="password" id="password"/> <br />
+	<input name="password" type="password" id="password"/>（記号を含む全ての半角文字で6文字以上255文字以下)<br />
 
 	<label for="confirmation">確認用パスワード</label>
 	<input name="confirmation" type="password" id="confirmation"/> <br />
