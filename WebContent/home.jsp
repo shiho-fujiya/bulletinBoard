@@ -10,6 +10,31 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>掲示板システム</title>
 
+	<script type="text/javascript">
+<!--
+
+function check(){
+
+	// 「OK」時の処理開始 ＋ 確認ダイアログの表示
+	if(window.confirm('削除します、よろしいですか？')){
+		location.href = "example_confirm.html"; // example_confirm.html へジャンプ
+		return true; // 「OK」時は送信を実行
+	}
+	// 「OK」時の処理終了
+
+	// 「キャンセル」時の処理開始
+	else{
+
+		window.alert('キャンセルされました'); // 警告ダイアログを表示
+		return false; // 送信を中止
+	}
+	// 「キャンセル」時の処理終了
+
+}
+
+// -->
+</script>
+
 	<link href="./css/style.css" rel="stylesheet" type="text/css">
 	<style type="text/css">
 	<!--
@@ -45,9 +70,6 @@
 		<a href="./?user_id=${user.id}"></a>
 			<div class="name"><h2><c:out value="${user.name }" /></h2></div>
 			<div class="account">
-				<a href="./?user_id=${user.id }">@<c:out value="${ user.account }" /></a>
-			</div>
-			<div class="account">
 		</div>
 	</div>
 </c:if>
@@ -82,15 +104,15 @@
 			<div class="account-name">
 				<span class="name"><c:out value="${post.name}" /></span>
 			</div>
-			<div class="subject"><c:out value="${post.subject}" /></div>
-			<div class="category"><c:out value="${post.category}" /></div>
-			<div class="text">
+			<div class="subject">件名<br><c:out value="${post.subject}" /></div>
+			<div class="category">カテゴリー<br><c:out value="${post.category}" /></div>
+			<div class="text">本文<br>
 			<c:forEach var="s" items="${fn:split(post.text, '
 			')}">
 				<div><c:out value="${s}"></c:out></div>
 			</c:forEach>
 			<div class="date"><fmt:formatDate value="${post.insertDate}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
-			<form action="deletepost" method="post">
+			<form action="deletepost" method="post" onSubmit="return check()">
 				<c:choose>
 					<c:when test="${ user.positionId == 2 }">
 						<input type="hidden" name="postId" value="${ post.id }">
@@ -116,19 +138,19 @@
 						<div><c:out value="${s}"></c:out></div>
 					</c:forEach></div>
 					<div class="date"><fmt:formatDate value="${comment.insertDate}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
-					<form action="deletecomment" method="post">
+					<form action="deletecomment" method="post" onSubmit="return check()">
 						<c:choose>
 							<c:when test="${ user.positionId == 2 }">
 								<input type="hidden" name="commentId" value="${ comment.id }">
-								<input type="submit" value="この投稿を削除" />
+								<input type="submit" value="このコメントを削除" />
 							</c:when>
 							<c:when test="${ loginUser.positionId == 3 && loginUser.branchId == comment.branchId }">
 								<input type="hidden" name="commentId" value="${ comment.id }">
-								<input type="submit" value="この投稿を削除" />
+								<input type="submit" value="このコメントを削除" />
 							</c:when>
 							<c:when test="${ user.id == loginUser.id && loginUser.id == comment.userId }">
 								<input type="hidden" name="commentId" value="${ comment.id }">
-								<input type="submit" value="この投稿を削除" />
+								<input type="submit" value="このコメントを削除" />
 							</c:when>
 						</c:choose>
 					</form>
@@ -145,6 +167,8 @@
 				<input type="submit" value="コメント" /> <br />
 			</form>
 		</div>
+
+
 	</c:forEach>
 </div>
 

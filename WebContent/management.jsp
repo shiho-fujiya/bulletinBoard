@@ -16,7 +16,7 @@
 function check(){
 
 	// 「OK」時の処理開始 ＋ 確認ダイアログの表示
-	if(window.confirm('本当にいいんですね？')){
+	if(window.confirm('変更します、よろしいですか？')){
 		location.href = "example_confirm.html"; // example_confirm.html へジャンプ
 		return true; // 「OK」時は送信を実行
 	}

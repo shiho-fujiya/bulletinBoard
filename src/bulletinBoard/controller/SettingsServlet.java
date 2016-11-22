@@ -32,7 +32,10 @@ public class SettingsServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		String id = request.getParameter("userId");
 
-		if (!id.matches("[0-9]+$")) {
+
+
+
+		if (StringUtils.isEmpty(id) || !id.matches("[0-9]+$")) {
 			response.sendRedirect("management");
 			List<String> messages = new ArrayList<String>();
 			messages.add("無効なIDです");
@@ -85,7 +88,7 @@ public class SettingsServlet extends HttpServlet {
 
 		if (isValid(request, messages) == true) {
 			new UserService().update(editUser);
-
+//			request.setAttribute("loginUser", loginUser);
 			response.sendRedirect("management");
 		} else {
 			session.setAttribute("errorMessages", messages);

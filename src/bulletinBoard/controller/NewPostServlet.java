@@ -87,22 +87,22 @@ public class NewPostServlet extends HttpServlet {
 		String text = request.getParameter("text");
 		//System.out.println(text);
 
-		if (StringUtils.isEmpty(subject) == true) {
+		if (StringUtils.isEmpty(subject) == true || StringUtils.isBlank(subject)) {
 			messages.add("件名を入力してください");
-		}else if (50< subject.length()) {
-			messages.add("50文字以下で入力してください");
+		} else if (50< subject.length()) {
+			messages.add("件名は50文字以下で入力してください");
 		}
 
-		if (StringUtils.isEmpty(text) == true) {
+		if (StringUtils.isEmpty(text) == true || StringUtils.isBlank(text)) {
 			messages.add("本文を入力してください");
 		} else if (1000 < text.length()) {
-			messages.add("1000文字以下で入力してください");
+			messages.add("本文は1000文字以下で入力してください");
 		}
 
-		if (StringUtils.isEmpty(category) == true) {
+		if (StringUtils.isEmpty(category) == true  || StringUtils.isBlank(category)) {
 			messages.add("カテゴリーを入力してください");
 		} else if (10 < category.length()) {
-			messages.add("10文字以下で入力してください");
+			messages.add("カテゴリーは10文字以下で入力してください");
 		}
 
 		if (messages.size() == 0) {

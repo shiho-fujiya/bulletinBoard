@@ -38,30 +38,40 @@
 	<label for="confirmation">確認用パスワード</label>
 	<input name="confirmation" type="password" id="confirmation"/> <br />
 
-	<label for="branch_id">所属</label>
-		<div class="branches">
-			<select name="branchId">
-				<c:forEach items="${branches}" var="branch">
-					<option value="${ branch.id}" >${ branch.name }</option>
+	<c:if test="${ loginUser.id != editUser.id }">
+		<label for="branch_id">所属</label>
+			<div class="branches">
+				<select name="branchId">
+					<c:forEach items="${branches}" var="branch">
 						<c:if test="${ branch.id == editUser.branchId }" >
 							<option value="${ branch.id}" selected >${ branch.name }</option>
 						</c:if>
-				</c:forEach>
-			</select>
-		</div>
+						<c:if test="${ branch.id != editUser.branchId }">
+							<option value="${ branch.id }">${ branch.name }</option>
+						</c:if>
+					</c:forEach>
+				</select>
+			</div>
 
-	<label for="position_id">部署・役職</label>
-		<div class="positions">
-			<select name="positionId">
-
-				<c:forEach items="${positions}" var="position">
-					<option value="${ position.id}" >${ position.name }</option>
+		<label for="position_id">部署・役職</label>
+			<div class="positions">
+				<select name="positionId">
+					<c:forEach items="${positions}" var="position">
 						<c:if test="${ position.id == editUser.positionId }" >
 							<option value="${ position.id}" selected >${ position.name }</option>
 						</c:if>
-				</c:forEach>
-			</select>
-		</div>
+						<c:if test="${ position.id != editUser.positionId }">
+							<option value="${ position.id }">${ position.name }</option>
+						</c:if>
+					</c:forEach>
+				</select>
+			</div>
+	</c:if>
+
+	<c:if test="${ loginUser.id == editUser.id }">
+		<input type="hidden" name="branchId" value="1">
+		<input type="hidden" name="positionId" value="1">
+	</c:if>
 
 	<input type="submit" value="登録" /> <br />
 

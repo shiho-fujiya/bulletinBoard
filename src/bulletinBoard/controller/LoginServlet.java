@@ -26,7 +26,6 @@ public class LoginServlet extends HttpServlet {
 
 	}
 
-	@SuppressWarnings("unused")
 	@Override
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -38,7 +37,7 @@ public class LoginServlet extends HttpServlet {
 		User user = loginService.login(account, password);
 
 		HttpSession session = request.getSession();
-		if (user != null) {
+		if (user != null && user.getOperation() == true) {
 
 			session.setAttribute("loginUser", user);
 
@@ -47,7 +46,7 @@ public class LoginServlet extends HttpServlet {
 		} else {
 
 			List<String> messages = new ArrayList<String>();
-			if (user == null) {
+			if (user == null || user.getOperation() == false) {
 				messages.add("ログインに失敗しました。");
 				session.setAttribute("errorMessages", messages);
 				session.setAttribute("account", account);

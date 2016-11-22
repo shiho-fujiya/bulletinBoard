@@ -27,7 +27,7 @@
 
 <form action="login" method="post"><br />
 	<label for="account">アカウント名</label>
-	<input name="account" id="account" /> <br />
+	<input name="account" id="account" value="${ account }" /> <br />
 
 
 	<label for="password">パスワード</label>
