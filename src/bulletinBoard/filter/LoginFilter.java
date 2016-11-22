@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bulletinBoard.beans.User;
+import bulletinBoard.service.SettingService;
 
 @WebFilter("/*")
 public class LoginFilter implements Filter{
@@ -29,6 +30,18 @@ public class LoginFilter implements Filter{
 				((HttpServletResponse)response).sendRedirect("./login");
 				return;
 			}
+
+			//userIdで自分を検索
+			int userId = user.getId();
+			//DBから自分の最新の情報を取得
+			User newUser = new SettingService().getUser(userId);
+
+			//DBのoperationと自分のoperationが一致するか判定
+			if (newUser.getOperation() == false) {
+				((HttpServletResponse)response).sendRedirect("./login");
+				return;
+			}
+
 		}
 		chain.doFilter(request, response);
 	}

@@ -95,7 +95,7 @@ function check(){
 			<input type="date" name="oldDate" value="${ oldDate }">～<input type="date" name="newDate" value="${ newDate }">
 				<input type="submit" value="選択" />
 			</form>
-			<p><a href="./"><input type="submit" value="絞り込み解除" /></a></p>
+			<p><a href="./"><input type="submit" value="リセット" /></a></p>
 		</div>
 
 

@@ -171,12 +171,11 @@ public class UserDao {
 
 		PreparedStatement ps = null;
 		try {
-			String sql = "SELECT * FROM users WHERE id = ?";
+			StringBuilder sql = new StringBuilder();
+			sql.append("SELECT * FROM users WHERE id = ?");
 
-			ps = connection.prepareStatement(sql);
+			ps = connection.prepareStatement(sql.toString());
 			ps.setInt(1, userId);
-
-			//System.out.println(ps.toString());
 
 			ResultSet rs = ps.executeQuery();
 			List<User> userList = toUserList(rs);
