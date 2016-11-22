@@ -100,7 +100,12 @@ public class UserPostDao {
 
 			List<UserPost> ret = toUserPostList(rs);
 
-			return ret.get(0);
+			if (ret.size() == 0) {
+				return null;
+			} else {
+				return ret.get(0);
+			}
+
 		} catch (SQLException e) {
 			throw new SQLRuntimeException(e);
 		} finally {
@@ -121,7 +126,11 @@ public class UserPostDao {
 
 			List<UserPost> ret = toUserPostList(rs);
 
-			return ret.get(0);
+			if (ret.size() == 0) {
+				return null;
+			} else {
+				return ret.get(0);
+			}
 		} catch (SQLException e) {
 			throw new SQLRuntimeException(e);
 		} finally {

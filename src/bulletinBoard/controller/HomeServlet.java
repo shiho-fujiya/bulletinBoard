@@ -37,13 +37,22 @@ public class HomeServlet extends HttpServlet {
 		if(StringUtils.isEmpty(oldDate)) {
 			// ユーザーが日付を入力してないのでDBから日付を取得
 			UserPost post = new PostService().getOldDate();
-			oldDate = new SimpleDateFormat("yyyy/MM/dd").format(post.getInsertDate());
+			if (post != null) {
+				oldDate = new SimpleDateFormat("yyyy/MM/dd").format(post.getInsertDate());
+			} else {
+				oldDate = "";
+			}
 		}
 		// 最大の日付が入力されているか判定
 		if(StringUtils.isEmpty(newDate)) {
 			// ユーザーが日付を入力してないのでDBから日付を取得
 			UserPost post = new PostService().getNewDate();
-			newDate = new SimpleDateFormat("yyyy/MM/dd").format(post.getInsertDate());
+			if (post != null) {
+				newDate = new SimpleDateFormat("yyyy/MM/dd").format(post.getInsertDate());
+			} else {
+				newDate = "";
+				System.out.println(newDate);
+			}
 		}
 
 		// 投稿を絞り込む
