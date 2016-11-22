@@ -60,6 +60,7 @@ public class HomeServlet extends HttpServlet {
 		request.setAttribute("posts", posts);
 		request.setAttribute("user", user);
 		request.setAttribute("comments", comments);
+		request.setAttribute("loginUser", user);
 
 		request.getRequestDispatcher("/home.jsp").forward(request, response);
 

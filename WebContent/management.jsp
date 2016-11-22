@@ -58,8 +58,8 @@ function check(){
 	</div>
 	<c:remove var="errorMessages" scope="session"/>
 </c:if>
-	<a href="signup">ユーザー新規登録</a>
 	<a href="home">ホーム</a>
+	<a href="signup">ユーザー新規登録</a>
 
 <div class="header">
 </div>

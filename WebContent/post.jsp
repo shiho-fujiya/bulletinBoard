@@ -8,6 +8,14 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>新規投稿</title>
 	<link href="./css/style.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+	<!--
+	body {
+	background-color: pink;
+	}
+	-->
+	</style>
+
 </head>
 <body>
 

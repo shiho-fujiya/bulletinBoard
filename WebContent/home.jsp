@@ -45,10 +45,11 @@ function check(){
 	</style>
 </head>
 <body>
-<h1>ホーム画面</h1>
 <div class="main-contents">
 		<a href="post">新規投稿</a>
-		<a href="management">ユーザー管理</a>
+		<c:if test="${ loginUser.positionId == 1 && loginUser.branchId == 1 }">
+			<a href="management">ユーザー管理</a>
+		</c:if>
 		<a href="logout">ログアウト</a>
 
 <div class="header">
@@ -67,10 +68,12 @@ function check(){
 
 <c:if test="${ not empty user }">
 	<div class="profile">
-		<a href="./?user_id=${user.id}"></a>
-			<div class="name"><h2><c:out value="${user.name }" /></h2></div>
-			<div class="account">
-		</div>
+		<form action="settings" method="get">
+			<a href="./?user_id=${loginUser.id}"></a>
+				<div class="name"><h2><c:out value="${loginUser.name }" /></h2></div>
+				<div class="account">
+			</div>
+		</form>
 	</div>
 </c:if>
 
@@ -88,10 +91,8 @@ function check(){
 							</c:if>
 						</c:forEach>
 				</select>
-	<br>
-			<input type="date" name="oldDate" value="${ oldDate }">
-	<br>
-			<input type="date" name="newDate" value="${ newDate }">
+			<label for="old">日付選択</label>
+			<input type="date" name="oldDate" value="${ oldDate }">～<input type="date" name="newDate" value="${ newDate }">
 				<input type="submit" value="選択" />
 			</form>
 			<p><a href="./"><input type="submit" value="絞り込み解除" /></a></p>

@@ -32,9 +32,6 @@ public class SettingsServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		String id = request.getParameter("userId");
 
-
-
-
 		if (StringUtils.isEmpty(id) || !id.matches("[0-9]+$")) {
 			response.sendRedirect("management");
 			List<String> messages = new ArrayList<String>();
@@ -79,16 +76,21 @@ public class SettingsServlet extends HttpServlet {
 		user.setAccount(request.getParameter("account"));
 
 		User editUser = getEditUser(request);
-
 		editUser.setName(request.getParameter("name"));
 		editUser.setAccount(request.getParameter("account"));
 		editUser.setPassword(request.getParameter("password"));
 		editUser.setBranchId(Integer.parseInt(request.getParameter("branchId")));
 		editUser.setPositionId(Integer.parseInt(request.getParameter("positionId")));
 
+		User loginUser = (User) request.getSession().getAttribute("loginUser");
+
 		if (isValid(request, messages) == true) {
 			new UserService().update(editUser);
-//			request.setAttribute("loginUser", loginUser);
+
+
+			if (loginUser.getId() == editUser.getId()) {
+				session.setAttribute("loginUser", editUser);
+			}
 			response.sendRedirect("management");
 		} else {
 			session.setAttribute("errorMessages", messages);
