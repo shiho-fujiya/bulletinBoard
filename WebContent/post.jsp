@@ -8,14 +8,6 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>新規投稿</title>
 	<link href="./css/style.css" rel="stylesheet" type="text/css">
-	<style type="text/css">
-	<!--
-	body {
-	background-color: pink;
-	}
-	-->
-	</style>
-
 </head>
 <body>
 
@@ -31,6 +23,8 @@
 	</div>
 	<c:remove var="errorMessages" scope="session"/>
 </c:if>
+
+<div class="newpost">
 <form action="post" method="post"><br />
 	<label for="subject">件名</label>
 	<input name="subject" id="subject" value="${ post.subject }"/>（50文字以下で入力してください）<br />
@@ -48,6 +42,7 @@
 	<input type="submit" value="投稿" /> <br />
 
 </form>
+</div>
 
 <a href="./">戻る</a>
 </div>

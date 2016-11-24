@@ -36,13 +36,6 @@ function check(){
 </script>
 
 	<link href="./css/style.css" rel="stylesheet" type="text/css">
-	<style type="text/css">
-	<!--
-	body {
-	background-color: pink;
-	}
-	-->
-	</style>
 </head>
 <body>
 <div class="main-contents">
@@ -77,8 +70,8 @@ function check(){
 	</div>
 </c:if>
 
-<label for="category">カテゴリー選択</label>
-		<div class="category">
+<div class="choice">
+	<label for="category">カテゴリー選択</label>
 			<form action="home" method="get">
 				<select name="category">
 					<option value="">選択してください</option>
@@ -101,7 +94,7 @@ function check(){
 
 <div class="posts">
 	<c:forEach items="${posts}" var="post">
-		<div class="post"></div>
+		<div class="post">
 			<div class="account-name">
 				<span class="name"><c:out value="${post.name}" /></span>
 			</div>
@@ -112,6 +105,7 @@ function check(){
 			')}">
 				<div><c:out value="${s}"></c:out></div>
 			</c:forEach>
+			</div>
 			<div class="date"><fmt:formatDate value="${post.insertDate}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
 			<form action="deletepost" method="post" onSubmit="return check()">
 				<c:choose>
@@ -129,7 +123,9 @@ function check(){
 					</c:when>
 				</c:choose>
 			</form>
+		</div>
 
+		<div class="comments">
 			<c:forEach items="${comments}" var="comment">
 				<c:if test="${post.id == comment.postId}">
 					<div class="name"><c:out value="${comment.name}" /></div>
@@ -157,8 +153,9 @@ function check(){
 					</form>
 				</c:if>
 			</c:forEach>
+		</div>
 
-		<div class="comment"></div>
+		<div class="comment">
 			<form action="comment" method="post"><br />
 				<input type="hidden" name="postId" value="${post.id}">
 				<input type="hidden" name="commentId" value="${comment.id}">

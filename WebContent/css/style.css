@@ -1,5 +1,5 @@
 body {
-	background-color: #E3FFFF;
+	background-color: white;
 }
 
 .main-contents {
@@ -13,7 +13,7 @@ body {
 }
 
 .tweet-box {
-	width: 780px;
+	width: 770px;
 	height: 56px;
 }
 
@@ -62,39 +62,6 @@ a.profile .account {
 	background-color: #ECECFF;
 }
 
-.message-icon {
-	border-bottom-style: ridge;
-	margin-top: 5px;
-	margin-right: 5px;
-	margin-bottom: 5px;
-	margin-left: 5px;
-	height: 80px;
-}
-
-.message-icon .icon {
-	margin-top: 1px;
-	margin-right: 1px;
-	margin-bottom: 1px;
-	margin-left: 1px;
-	float: left;
-}
-
-.message-icon .text {
-	height: 40px;
-}
-
-.message-icon .message {
-	margin-left: 60px;
-}
-
-.message-icon .account-name {
-	margin-top: 1px;
-	margin-bottom: 5px;
-}
-
-.message-icon .account-name .account {
-	font-weight: bold;
-}
 
 .account-name .name {
 	font-weight: lighter;
@@ -111,6 +78,115 @@ a.profile .account {
 .copyright {
 	width: 250px;
 	margin: 0 auto;
+}
+
+.posts .post{
+	padding: .5em .75em;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+.account-name {
+	position: relative;
+	padding: .75em 1em .75em 1.5em;
+	border: 1px solid #ccc;
+}
+.account-name::after {
+	position: absolute;
+	top: .5em;
+	left: .5em;
+	content: '';
+	width: 6px;
+	height: -webkit-calc(100% - 1em);
+	height: calc(100% - 1em);
+	background-color: #3498db;
+	border-radius: 4px;
+}
+
+.posts .comments {
+	padding: .5em .75em;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+.subject{
+	position: relative;
+	padding: .75em 1em .75em 1.5em;
+	border: 1px solid #ccc;
+}
+.subject::after {
+	position: absolute;
+	top: .5em;
+	left: .5em;
+	content: '';
+	width: 6px;
+	height: -webkit-calc(100% - 1em);
+	height: calc(100% - 1em);
+	background-color: #3498db;
+	border-radius: 4px;
+}
+
+.category{
+	position: relative;
+	padding: .75em 1em .75em 1.5em;
+	border: 1px solid #ccc;
+}
+.category::after {
+	position: absolute;
+	top: .5em;
+	left: .5em;
+	content: '';
+	width: 6px;
+	height: -webkit-calc(100% - 1em);
+	height: calc(100% - 1em);
+	background-color: #3498db;
+	border-radius: 4px;
+}
+
+.choice{
+	padding: .5em .75em;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+.comment {
+	padding: .5em .75em;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+.text{
+	position: relative;
+	padding: .75em 1em .75em 1.5em;
+	border: 1px solid #ccc;
+}
+.text::after {
+	position: absolute;
+	top: .5em;
+	left: .5em;
+	content: '';
+	width: 6px;
+	height: -webkit-calc(100% - 1em);
+	height: calc(100% - 1em);
+	background-color: #3498db;
+	border-radius: 4px;
+}
+
+.comments .name{
+	position: relative;
+	padding: .75em 1em .75em 1.5em;
+	border: 1px solid #ccc;
+}
+.comments .name::after {
+	position: absolute;
+	top: .5em;
+	left: .5em;
+	content: '';
+	width: 6px;
+	height: -webkit-calc(100% - 1em);
+	height: calc(100% - 1em);
+	background-color: #3498db;
+	border-radius: 4px;
 }
 
 label {
