@@ -8,13 +8,6 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>ログイン</title>
 	<link href="./css/style.css" rel="stylesheet" type="text/css">
-	<style type="text/css">
-	<!--
-	body {
-	background-color: pink;
-	}
-	-->
-	</style>
 
 </head>
 <body>
@@ -34,12 +27,12 @@
 </c:if>
 
 <form action="login" method="post"><br />
-	<label for="account">アカウント名</label>
-	<input name="account" id="account" value="${ account }" /> <br />
+	<label for="account">アカウント名</label><br>
+	<input name="account" id="account" value="${ account }" /> <br /><br>
 
 
-	<label for="password">パスワード</label>
-	<input name="password" type="password" id="password"/> <br />
+	<label for="password">パスワード</label><br>
+	<input name="password" type="password" id="password"/> <br /><br>
 	<c:remove var="account" scope="session"/>
 	<input type="submit" value="ログイン" /> <br />
 </form>

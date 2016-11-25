@@ -136,7 +136,7 @@ public class SettingsServlet extends HttpServlet {
 
 		if (StringUtils.isEmpty(name) == true) {
 			messages.add("名前を入力してください");
-		}else if (name.length() >= 10) {
+		}else if (name.length() > 10) {
 			messages.add("名前は10文字以内で設定してください");
 		}
 

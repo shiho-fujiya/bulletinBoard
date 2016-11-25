@@ -1,5 +1,5 @@
 body {
-	background-color: white;
+	background-color: #ffffff;
 }
 
 .main-contents {
@@ -62,7 +62,6 @@ a.profile .account {
 	background-color: #ECECFF;
 }
 
-
 .account-name .name {
 	font-weight: lighter;
 	color: brack;
@@ -80,27 +79,25 @@ a.profile .account {
 	margin: 0 auto;
 }
 
+.bottun {
+	text-align : center ; }
+
+.main-contents {
+	padding: .5em .75em;
+	background-color: #ffffff;
+	border-radius: 6px;
+}
+
 .posts .post{
 	padding: .5em .75em;
 	border: 1px solid #ccc;
 	border-radius: 4px;
 }
 
-.account-name {
+.post {
 	position: relative;
 	padding: .75em 1em .75em 1.5em;
 	border: 1px solid #ccc;
-}
-.account-name::after {
-	position: absolute;
-	top: .5em;
-	left: .5em;
-	content: '';
-	width: 6px;
-	height: -webkit-calc(100% - 1em);
-	height: calc(100% - 1em);
-	background-color: #3498db;
-	border-radius: 4px;
 }
 
 .posts .comments {
@@ -109,38 +106,29 @@ a.profile .account {
 	border-radius: 4px;
 }
 
-.subject{
-	position: relative;
-	padding: .75em 1em .75em 1.5em;
-	border: 1px solid #ccc;
-}
-.subject::after {
-	position: absolute;
-	top: .5em;
-	left: .5em;
-	content: '';
-	width: 6px;
-	height: -webkit-calc(100% - 1em);
-	height: calc(100% - 1em);
-	background-color: #3498db;
-	border-radius: 4px;
+.subject {
+	padding: .25em 0 .25em .75em;
+	border-left: 6px solid #ff80c0;
 }
 
-.category{
-	position: relative;
-	padding: .75em 1em .75em 1.5em;
-	border: 1px solid #ccc;
+.category {
+	padding: .25em 0 .25em .75em;
+	border-left: 6px solid #ff80c0;
 }
-.category::after {
-	position: absolute;
-	top: .5em;
-	left: .5em;
-	content: '';
-	width: 6px;
-	height: -webkit-calc(100% - 1em);
-	height: calc(100% - 1em);
-	background-color: #3498db;
-	border-radius: 4px;
+
+.name {
+	padding: .25em 0 .25em .75em;
+	border-left: 6px solid #ff80c0;
+}
+
+.text {
+	padding: .25em 0 .25em .75em;
+	border-left: 6px solid #ff80c0;
+}
+
+.date {
+	padding: .25em 0 .25em .75em;
+	border-left: 6px solid #ff80c0;
 }
 
 .choice{
@@ -155,38 +143,10 @@ a.profile .account {
 	border-radius: 4px;
 }
 
-.text{
+.comments{
 	position: relative;
 	padding: .75em 1em .75em 1.5em;
 	border: 1px solid #ccc;
-}
-.text::after {
-	position: absolute;
-	top: .5em;
-	left: .5em;
-	content: '';
-	width: 6px;
-	height: -webkit-calc(100% - 1em);
-	height: calc(100% - 1em);
-	background-color: #3498db;
-	border-radius: 4px;
-}
-
-.comments .name{
-	position: relative;
-	padding: .75em 1em .75em 1.5em;
-	border: 1px solid #ccc;
-}
-.comments .name::after {
-	position: absolute;
-	top: .5em;
-	left: .5em;
-	content: '';
-	width: 6px;
-	height: -webkit-calc(100% - 1em);
-	height: calc(100% - 1em);
-	background-color: #3498db;
-	border-radius: 4px;
 }
 
 label {
@@ -199,4 +159,12 @@ label {
 	margin-bottom: 10px;
 	margin-left: 10px;
 	color: red;
+}
+
+table td{
+	padding: 5px;
+}
+
+h1{
+	padding: 0px 20px;
 }

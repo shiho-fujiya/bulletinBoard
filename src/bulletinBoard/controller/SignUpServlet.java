@@ -81,7 +81,7 @@ public class SignUpServlet extends HttpServlet {
 
 		if (StringUtils.isEmpty(name) == true) {
 			messages.add("名前を入力してください");
-		} else if (name.length() >= 10) {
+		} else if (name.length() > 10) {
 			messages.add("名前は10文字以下で設定してください");
 		}
 

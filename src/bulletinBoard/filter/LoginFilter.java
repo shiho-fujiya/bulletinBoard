@@ -33,6 +33,7 @@ public class LoginFilter implements Filter{
 
 			//userIdで自分を検索
 			int userId = user.getId();
+
 			//DBから自分の最新の情報を取得
 			User newUser = new SettingService().getUser(userId);
 

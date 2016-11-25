@@ -39,25 +39,9 @@ function check(){
 </head>
 <body>
 <div class="main-contents">
-		<a href="post">新規投稿</a>
-		<c:if test="${ loginUser.positionId == 1 && loginUser.branchId == 1 }">
-			<a href="management">ユーザー管理</a>
-		</c:if>
-		<a href="logout">ログアウト</a>
-
 <div class="header">
 </div>
 
-<c:if test="${ not empty errorMessages }">
-	<div class="errorMessages">
-		<ul>
-			<c:forEach items="${errorMessages}" var="message">
-				<li><c:out value="${message}" />
-			</c:forEach>
-		</ul>
-	</div>
-	<c:remove var="errorMessages" scope="session"/>
-</c:if>
 
 <c:if test="${ not empty user }">
 	<div class="profile">
@@ -68,6 +52,23 @@ function check(){
 			</div>
 		</form>
 	</div>
+</c:if>
+
+<a href="post">新規投稿</a>
+		<c:if test="${ loginUser.positionId == 1 && loginUser.branchId == 1 }">
+			<a href="management">ユーザー管理</a>
+		</c:if>
+		<a href="logout">ログアウト</a><br><br>
+
+<c:if test="${ not empty errorMessages }">
+	<div class="errorMessages">
+		<ul>
+			<c:forEach items="${errorMessages}" var="message">
+				<li><c:out value="${message}" />
+			</c:forEach>
+		</ul>
+	</div>
+	<c:remove var="errorMessages" scope="session"/>
 </c:if>
 
 <div class="choice">
@@ -97,16 +98,16 @@ function check(){
 		<div class="post">
 			<div class="account-name">
 				<span class="name"><c:out value="${post.name}" /></span>
-			</div>
-			<div class="subject">件名<br><c:out value="${post.subject}" /></div>
-			<div class="category">カテゴリー<br><c:out value="${post.category}" /></div>
+			</div><br>
+			<div class="subject">件名<br><c:out value="${post.subject}" /></div><br>
+			<div class="category">カテゴリー<br><c:out value="${post.category}" /></div><br>
 			<div class="text">本文<br>
 			<c:forEach var="s" items="${fn:split(post.text, '
 			')}">
 				<div><c:out value="${s}"></c:out></div>
 			</c:forEach>
-			</div>
-			<div class="date"><fmt:formatDate value="${post.insertDate}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
+			</div><br>
+			<div class="date"><fmt:formatDate value="${post.insertDate}" pattern="yyyy/MM/dd HH:mm:ss" /></div><br>
 			<form action="deletepost" method="post" onSubmit="return check()">
 				<c:choose>
 					<c:when test="${ user.positionId == 2 }">
@@ -122,19 +123,19 @@ function check(){
 						<input type="submit" value="この投稿を削除" />
 					</c:when>
 				</c:choose>
-			</form>
+			</form><br>
 		</div>
 
 		<div class="comments">
 			<c:forEach items="${comments}" var="comment">
 				<c:if test="${post.id == comment.postId}">
-					<div class="name"><c:out value="${comment.name}" /></div>
+					<div class="name"><c:out value="${comment.name}" /></div><br>
 					<div class="text">
 					<c:forEach var="s" items="${fn:split(comment.text, '
 						')}">
 						<div><c:out value="${s}"></c:out></div>
-					</c:forEach></div>
-					<div class="date"><fmt:formatDate value="${comment.insertDate}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
+					</c:forEach></div><br>
+					<div class="date"><fmt:formatDate value="${comment.insertDate}" pattern="yyyy/MM/dd HH:mm:ss" /></div><br>
 					<form action="deletecomment" method="post" onSubmit="return check()">
 						<c:choose>
 							<c:when test="${ user.positionId == 2 }">
@@ -150,7 +151,7 @@ function check(){
 								<input type="submit" value="このコメントを削除" />
 							</c:when>
 						</c:choose>
-					</form>
+					</form><br>
 				</c:if>
 			</c:forEach>
 		</div>
@@ -161,10 +162,10 @@ function check(){
 				<input type="hidden" name="commentId" value="${comment.id}">
 				<label for="text">本文</label>
 				<textarea name="text" cols="100" rows="5" class="tweet-box">${ comment.text }</textarea>
-				(500文字以下で入力してください)<br />
+				(500文字以下で入力してください)<br /><br>
 				<input type="submit" value="コメント" /> <br />
 			</form>
-		</div>
+		</div><br>
 
 
 	</c:forEach>
